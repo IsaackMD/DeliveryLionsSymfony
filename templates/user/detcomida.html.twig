@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inicio{% endblock %}
+ {% block stylesheets %}
+ <link rel="stylesheet" href="{{ asset('styles/client/detcomida.css') }}">
+
+ {% endblock %}
+{% block body %}
+{# <div class="btn-back-content" style="margin: 5px 0; ">
+    <a class="back_btn" href="javascript:history.go(-1);" type="button">
+        <i class="fa-solid fa-chevron-left"></i> Regresar
+    </a>
+</div> #}
+<form method="post">
+<main class="col-12">
+        <div class="img-container">
+            <img id="imgcomida" src="{{asset('imgs/MenuFotos/' ~ comida.Imagen)}}" alt="imagen de comida">
+        </div>
+        <div class="info-container">
+            <div class="title-container">
+                <h1 id="NomComida">{{comida.NomMenu}}</h1>
+            </div>
+            <div class="descr-content negocio">
+                <span class="span_detNe"> Negocio:</span> <p id="Negocio" style="font-size: x-large;">{{negocio.Negocio}}</p>
+            </div>
+            <div class="descr-content">
+                <p id="descp">{{comida.Descrip}}</p>
+            </div>
+            <div class="descr-content comid-content" id="ComiIncl">
+            </div>
+            
+            <div class="cost-content">
+                <h4 id="cost">${{comida.Precio}}MXN</h4>
+            </div>
+            <div>
+                <input id="MenuID" type="hidden" value= "{{ comida.id }}" name="MenuID"/>
+                <input id="cantidad" type="number" value = "1" class="form-control input_number" name="cantidad"/>
+            </div>
+            <div class="btn-container"><button id="btn" class="btn-buy" onclick="agregar()">Comprar</button></div>
+        </div>
+</main>
+</form>
+   <section class="py-2 bg-light">
+            <div class="container px-2 px-lg-4 mt-4">
+                <h2 class="fw-bolder mb-2">Productos Relacionados</h2>
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    {% for com in comidas%}
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <!-- Sale badge-->
+                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                                <!-- Product image-->
+                                <img class="card-img-top" src="{{asset('imgs/MenuFotos/' ~ com.Imagen)}}" alt="...">
+                                <!-- Product details-->
+                                <div class="card-body p-3">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 class="fw-bolder">{{com.NomMenu}}</h5>
+                                        <!-- Product reviews-->
+                                        <!-- Product price-->
+                                         <!-- <span class="text-muted text-decoration-line-through"></span> -->
+                                        ${{com.Precio}}MXN
+                                    </div>
+                                </div>
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Ver más</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                </div>
+            </div>
+        </section>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    var cantidad;
+    var MenuID;
+
+    function agregar() {
+        cantidad = $('#cantidad').val();
+        MenuID = $('#MenuID').val();
+        $.ajax({
+            url: '{{ path("app_add_carrito") }}',
+            method: 'POST',
+            data: {
+                cantidad: cantidad,
+                MenuID: MenuID
+            },
+            success: function(response) {
+                Swal.fire({
+                    title: "Agregado!",
+                    text: "Su producto se agregó exitosamente!",
+                    icon: "success"
+                }).then(() => {
+                    location.reload();
+                });
+            },
+            error: function(xhr, status, error) {
+                alert('Error: ' + xhr.responseJSON.error);
+            }
+        });
+    }
+</script>
+{% endblock %}

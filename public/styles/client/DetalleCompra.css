@@ -1,0 +1,22 @@
+.row_detalleC{
+    background: white;
+    margin-top: 30px;
+    border-radius: 8px;
+    padding: 20px;
+}
+.detalleTotal{
+    box-shadow: -7px -5px 10px -5px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    padding: 8px;
+    min-height: 400px;
+}
+.detp{
+    margin-bottom: 0rem !important;
+    font-size: medium;
+    font-weight: 400;
+}
+.detaCompra{
+    min-height: 310px;
+    padding: 15px 15px 0;
+    text-align: justify;
+}

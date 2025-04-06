@@ -1,0 +1,39 @@
+.formularioRegistro {
+    position: sticky;
+    max-width: 700px;
+    width: 100%;
+    background: #ff9e38;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 20px auto;
+}
+.formularioCuerpo{
+    /*margin-top: 30px;*/
+    width: 100%;
+}
+.columnasFormulario{
+    display: flex;
+    column-gap: 20px;
+    text-align: left;
+}
+.inputs{
+    width: 100%;
+    margin-top: 20px;
+    
+}
+
+input[type="text"], input[type="password"] {
+    position: relative;
+    height: 40px;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    color: black;
+    background-color: #FFF7F2;
+    margin-top: 8px;
+    border: 1px solid #935230;
+    border-radius: 6px;
+    padding: 0px 5px;
+}

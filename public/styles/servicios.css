@@ -1,0 +1,24 @@
+.content-text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 60px;
+    color:white;
+    font-size: 35px;
+}
+.serviciosContexto{
+    display: grid;
+    color:white;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1.5rem;
+    align-items: center;
+    padding: 20px;
+    margin: auto;
+    justify-items: center;
+    text-align: center;
+    width: 80%;
+    row-gap: 2.5rem;
+    text-align: center;
+    text-decoration:none;
+}

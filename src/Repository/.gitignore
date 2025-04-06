@@ -1,0 +1,27 @@
+# Archivos de entorno
+.env
+.env.local
+.env.local.php
+.env.test
+.env.test.local
+
+# Symfony
+/var/
+/var/cache/
+/var/log/
+/var/sessions/
+/var/test/
+/vendor/
+/public/build/
+
+# Node
+/node_modules/
+
+# IDEs y editores
+.idea/
+.vscode/
+.sublime-project
+.sublime-workspace
+
+# Otros
+.php_cs.cache

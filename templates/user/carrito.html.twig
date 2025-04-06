@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="{{ asset('styles/client/carrito.css') }}">
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+        <h5 id="offcanvasRightLabel">Carrito de Compras <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></h5>
+        <button type="button" class="btn-close text-reset btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div id="carrito-content">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p>Cargando...</p>
+        </div>
+    </div>
+    <div class="var-price">
+        <h5 class="text-center">Total: <span id="total"></span></h5>
+            <div class="content-btn">
+                <button id="btnCompra" class="btn btn-success btn-st-p" onclick="detalleCompra()">Pedir</button>
+            </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Carga el contenido del carrito cuando el documento esté listo
+    carrito();
+});
+
+function carrito() {
+    var total = 0;
+    $.ajax({
+        url: "{{ path('app_carrito') }}",
+        type: "GET",
+        success: function(data) {
+            $('#carrito-content').empty();
+            if (data == null || data.length === 0) {
+                $('#carrito-content').html('<p>No hay productos en el carrito.</p>');
+                $('#btnCompra').prop('disabled', true);
+                return;
+            }
+            // Itera sobre los elementos del carrito
+            data.forEach(function(pedido) {
+                pedido.menus.forEach(function(item) {
+                    // Genera el HTML dinámicamente para cada elemento del carrito
+                    let elementos = 
+                    '<div class="contentItem">' +
+                    '<p class="itemCarritoNom">' + item.nombre + ' <span>Cant: ' + item.cantidad + ' x $' + item.precio + ' MXN</span></p>' +
+                    '<button type="button" onclick="eliminar(\'' + pedido.id + '\', \'' + item.id + '\')" class="btn-close btn-close-white" aria-label="Close"></button>' +
+                    '</div>';
+                    // Añade el elemento al contenedor
+                    $('#carrito-content').append(elementos);
+                    
+                });
+            });
+            total = data[0]['total'];
+            $('#total').text('$' + total + ' MXN');
+
+        },
+        error: function(xhr, status, error) {
+            console.error("Error al obtener el carrito: ", error);
+        }
+    });
+}
+
+function eliminar(cid, id) {
+    $.ajax({
+        url: "{{ path('app_delete', {'cid': 'CID', 'id': 'ID'}) }}"
+            .replace('CID', cid)
+            .replace('ID', id),
+        type: "DELETE",
+        success: function(data) {
+            Swal.fire({
+                title: "Eliminado!",
+                text: "El producto fue eliminado del carrito!",
+                icon: "success"
+            }).then(() => {
+                // Recargar el contenido del carrito
+                carrito();
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error("Error al eliminar el item: ", error);
+        }
+    });
+}
+
+function detalleCompra() {
+    window.location.href = "{{ path('app_detalle_compra') }}";
+}
+
+</script>
+

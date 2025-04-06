@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mis pedidos{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Mis pedidos</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">PedidoID</th>
+                        <th scope="col">Menu</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Estatus</th>
+                        <th scope="col">Fecha Pedido</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pedido in pedidos %}
+                        {% for pedidoMenu in pedido.getPedidoMenus() %}
+                            <tr>
+                                <th scope="row">{{ pedidoMenu.getId() }}</th>
+                                <td>{{ pedidoMenu.getMenu().getNomMenu() }}</td>
+                                <td>{{ pedidoMenu.getCantidad() }}</td>
+                                <td style="color: green;">${{ pedido.getPrecio() }}MXN</td>
+                                <td>{{ pedido.getEstatus() }}</td>
+                                <td>{{ pedido.getFechaPedido()|date('Y-m-d') }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

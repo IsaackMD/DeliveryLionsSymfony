@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inicio{% endblock %}
+ {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/client/detallsAfi.css') }}">
+
+ {% endblock %}
+{% block body %}
+    <main>
+        <div class="info-container">
+            <div class="title-container">
+                <h1>Detalle Del Vendedor</h1>
+            </div>
+            <div class="descr-content name-content">
+                <p id="Negocio">{{negocio.Negocio}} </p>
+            </div>
+            <div class="descr-content">
+                <p id="descr">{{negocio.descripcion}}</p>
+            </div>
+           <div class="descr-content">
+                <p id="tiposP">Tipo de Comida que suelo ofrecer: </p>
+                <span id="Categoria">*{{catComida.Categoria}}</span>
+            </div>
+        </div>
+        <div class="img-container">
+            <div class="img-content">
+                <img id="imgAfi" src="{{asset('imgs/NegocioFotos/' ~ negocio.imagen)}}" alt="img afiliado">
+                <div style="margin-top: 30px;">
+                    <button class="btn btn-success" style="width: 100%">Ver Más</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+</html>
+{% endblock %}
