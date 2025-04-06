@@ -1,28 +1,18 @@
+# Ignorar la carpeta node_modules
+/node_modules/
 
-###> symfony/framework-bundle ###
-.env.local
-.env
-/.env.local.php
-.env.*.local
-/config/secrets/prod/prod.decrypt.private.php
-/public/bundles/
+# Ignorar archivos y carpetas generadas por Symfony
 /var/
 /vendor/
-###< symfony/framework-bundle ###
 
-###> phpunit/phpunit ###
-/phpunit.xml
-.phpunit.result.cache
-###< phpunit/phpunit ###
+# Ignorar archivos de entorno
+.env
+.env.local
+.env.local.php
+.env.test
 
-###> symfony/phpunit-bridge ###
-.phpunit.result.cache
-/phpunit.xml
-###< symfony/phpunit-bridge ###
-
-###> symfony/asset-mapper ###
-/public/assets/
-/assets/vendor/
-###< symfony/asset-mapper ###
-
-/node_modules
+# Ignorar configuraciones de IDEs
+.idea/
+/.vscode/
+/.sublime-project
+.sublime-workspace
