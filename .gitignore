@@ -16,3 +16,5 @@
 /.vscode/
 /.sublime-project
 .sublime-workspace
+# Ignorar la carpeta assets/vendor/
+/assets/vendor/
