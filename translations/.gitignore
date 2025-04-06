@@ -16,6 +16,7 @@
 
 # Node
 /node_modules/
+/node_modules/package-lock.json
 
 # IDEs y editores
 .idea/
