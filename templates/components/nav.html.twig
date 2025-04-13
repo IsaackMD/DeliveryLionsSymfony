@@ -92,17 +92,23 @@
 <script src="https://cdn.jsdelivr.net/npm/glider-js@1.7.8/glider.min.js"></script>
 
 <script>
-        function showSidebar(){
-           const sidebar = document.querySelector('.sidebar')
-           sidebar.style.display = 'flex'
+    function showSidebar(){
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar) {
+            sidebar.style.display = 'flex';
         }
-        function hideSidebar() {
-            const sidebar = document.querySelector('.sidebar')
-           sidebar.style.display = 'none'
+    };
+    function hideSidebar() {
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar) {
+            sidebar.style.display = 'none';
         }
+    }
 
-        window.addEventListener('load', function(){
-            new Glider(document.querySelector('.carrusel-track'),{
+    {# window.addEventListener('load', function(){
+        const carruselTrack = document.querySelector('.carrusel-track');
+        if(carruselTrack && typeof Glider !== 'undefined'){
+            new Glider(carruselTrack, {
                 slidesToShow: 3,
                 slidesToScroll: 3,
                 dots: '.carousel__indicadores',
@@ -111,7 +117,7 @@
                     next: '#button-next'
                 }
             });
-
-        })
+        }
+    }); #}
 
     </script>

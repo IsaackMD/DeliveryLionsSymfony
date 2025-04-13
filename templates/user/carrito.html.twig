@@ -1,33 +1,35 @@
 <link rel="stylesheet" href="{{ asset('styles/client/carrito.css') }}">
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+
+<div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" data-bs-backdrop="static">
     <div class="offcanvas-header">
-        <h5 id="offcanvasRightLabel">Carrito de Compras <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></h5>
+        <h5 id="offcanvasRightLabel" class="fw-bold m-2 text-light">Tu Carrito <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></h5>
         <button type="button" class="btn-close text-reset btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body">
-        <div id="carrito-content">
-            <div class="spinner-border" role="status">
+    <div class="offcanvas-body text-center text-light">
+        <div id="carrito-content" class="overflow-auto">
+            <div class="spinner-border " role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
-            <p>Cargando...</p>
+            <p class="text-center">Cargando...</p>
         </div>
     </div>
-    <div class="var-price">
-        <h5 class="text-center">Total: <span id="total"></span></h5>
-            <div class="content-btn">
-                <button id="btnCompra" class="btn btn-success btn-st-p" onclick="detalleCompra()">Pedir</button>
+    <div class="var-price p-2">
+        <h5 class="text-center flex-1">Total: <span id="total"></span></h5>
+            <div class="content-btn d-grid gap-2">
+                <button id="btnCompra" class="btn btn-success btn-st-p" onclick="detalleCompra()">Pagar</button>
             </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 <script>
 $(document).ready(function() {
-    // Carga el contenido del carrito cuando el documento esté listo
-    carrito();
+    // Cargar el contenido del carrito al abrir el offcanvas
+    console.log("Cargando carrito...");
+    $('#offcanvasExample').on('show.bs.offcanvas', function () {
+        carrito();
+    });
 });
-
-function carrito() {
+    function carrito() {
     var total = 0;
     $.ajax({
         url: "{{ path('app_carrito') }}",
@@ -40,20 +42,34 @@ function carrito() {
                 return;
             }
             // Itera sobre los elementos del carrito
-            data.forEach(function(pedido) {
-                pedido.menus.forEach(function(item) {
-                    // Genera el HTML dinámicamente para cada elemento del carrito
-                    let elementos = 
-                    '<div class="contentItem">' +
-                    '<p class="itemCarritoNom">' + item.nombre + ' <span>Cant: ' + item.cantidad + ' x $' + item.precio + ' MXN</span></p>' +
-                    '<button type="button" onclick="eliminar(\'' + pedido.id + '\', \'' + item.id + '\')" class="btn-close btn-close-white" aria-label="Close"></button>' +
-                    '</div>';
-                    // Añade el elemento al contenedor
-                    $('#carrito-content').append(elementos);
-                    
-                });
+            $('#offcanvasRightLabel').text('Tu Carrito (' + data[0]['menus'].length + ')');
+            data[0]['menus'].forEach(function(producto) {
+                //console.log(producto);
+                const imgRuta = "{{ asset('imgs/MenuFotos/') }}" + producto.imagen;
+                let elementos = 
+                    `<div class="contentItem d-flex align-items-start gap-3 mb-3 p-2 rounded text-dark ">
+                        <div class="itemCarrito flex-shrink-0">
+                            <img src="${imgRuta}" alt="imagen comida" class="imgs-carrito rounded" style="width: 80px; height: 80px; object-fit: cover;">
+                        </div>
+                        <div class="itemCarrito w-100">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <p class="itemCarritoNom mb-1"><strong>${producto.nombre}</strong></p>
+                                    <p class="mb-1">Precio: <strong>$${producto.precio} MXN</strong></p>
+                                </div>
+                                <button type="button" onClick="eliminar(${producto.pedidomenuId})" class="btn-close" aria-label="Close"></button>
+                            </div>
+                            <div class="d-flex align-items-center mt-2">
+                                <label for="cantidad_${producto.id}" class="me-2 mb-0">Cantidad:</label>
+                                <input type="number" value="${producto.cantidad}" min="1" max="100" class="form-control form-control-sm" 
+                                    name="cantidad" id="cantidad_${producto.id}" style="width: 70px;">
+                            </div>
+                        </div>
+                    </div>`;
+
+                $('#carrito-content').append(elementos);
+                total += producto.precio * producto.cantidad;
             });
-            total = data[0]['total'];
             $('#total').text('$' + total + ' MXN');
 
         },
@@ -63,12 +79,13 @@ function carrito() {
     });
 }
 
-function eliminar(cid, id) {
+function eliminar(id) {
     $.ajax({
-        url: "{{ path('app_delete', {'cid': 'CID', 'id': 'ID'}) }}"
-            .replace('CID', cid)
-            .replace('ID', id),
+        url: '{{ path("add_to_carrito") }}',
         type: "DELETE",
+        data:{
+            id: id
+        },
         success: function(data) {
             Swal.fire({
                 title: "Eliminado!",

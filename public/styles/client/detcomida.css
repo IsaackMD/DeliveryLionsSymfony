@@ -3,86 +3,41 @@
     padding: 0;
     font-family: 'Poppins';
 }
+
 main {
     display: inline-flex;
     flex-wrap: nowrap;
     align-items: flex-start;
     margin: 35px 0px;
 }
-.info-container {
-    width: 60%;
-}
-.img-container {
-    width: 40%;
-    margin: 35px 15px 20px 35px ;
-}
-.img-container img{
-    width:100%;
-    height: auto;
-    border-radius: 15px;
-}
-.title-container {
-    color: #FFD735;
-    text-align: center;
-}
-.descr-content {
-    margin: 15px 20px;
+
+.modal-body-detC{
+  display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
     color: white;
 }
-.descr-content.negocio{
-    text-align: left;
-    display: contents;
-    margin-right: 45px;
-    font-weight: 200;
+.modal-body-detC div{
+  width: 50%;
+  padding: inherit;
 }
-.descr-content.negocio p{
-    margin-left: 30px;
+.modal-body-detC div img{
+  width: 100%;
+  height: 50vh;
+  border-radius: 10px;
 }
-p#descp {
-    margin-left: 15px;
+.modal-content{
+  background-color: #191919 !important;
+  border-radius: 10px;
 }
-.comid-content{
-    margin: 15px 70px;
-}
-.cost-content {
-    text-align: left;
-    margin-left: 50px;
-    color: #71D845;
-    font-size:25px;
+.modal-title{
+  color: orange;
 }
 .span_detNe{
-  font-size: 25px;
-  font-weight: 600;
+  font-size: 2rem;
 }
-
-#cost {
-    font-weight: 300;
-}
-main .btn-container {
-    text-align: center;
-}
-button.btn-buy {
-    padding: 12PX 45PX;
-    BACKGROUND: #FF914D;
-    BORDER: NONE;
-    BORDER-RADIUS: 1.75REM;
-    COLOR: WHITE;
-}
-.input_number{
-  margin-left: 50px;
-  margin-top: 15px;
-  max-width: 80px;
-}
-.back_btn{
-  background: red;
-  padding: 5px 15px;
-  margin: 5px;
-  border-radius: 5px;
-  color: white;
-  text-decoration: none;
-  
-}
-
 @charset "UTF-8";
 /*!
 * Start Bootstrap - Shop Item v5.0.6 (https://startbootstrap.com/template/shop-item)

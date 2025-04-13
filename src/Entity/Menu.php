@@ -43,6 +43,9 @@ class Menu
     #[ORM\OneToMany(targetEntity: PedidoMenu::class, mappedBy: 'Menu')]
     private Collection $pedidoMenus;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $Descuento = null;
+
     public function __construct()
     {
         $this->pedidoMenus = new ArrayCollection();
@@ -164,6 +167,18 @@ class Menu
                 $pedidoMenu->setMenu(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescuento(): ?int
+    {
+        return $this->Descuento;
+    }
+
+    public function setDescuento(?int $Descuento): static
+    {
+        $this->Descuento = $Descuento;
 
         return $this;
     }

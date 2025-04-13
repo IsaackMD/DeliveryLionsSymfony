@@ -22,27 +22,31 @@ class PedidoRepository extends ServiceEntityRepository
 //    /**
 //     * @return Pedido[] Returns an array of Pedido objects
 //     */
-    public function findById(User $value, int $opc): array
-    {
-        $query = $this->createQueryBuilder('p')
-            ->leftJoin('p.pedidoMenus', 'pd')
-            ->leftJoin('pd.Menu', 'm')
-            ->andWhere('p.Usuario = :usuario') // Cambiado a una comparación directa
-            ->setParameter('usuario', $value);
+public function findById(User $value, int $opc): array
+{
+    $query = $this->createQueryBuilder('p')
+        ->leftJoin('p.pedidoMenus', 'pd')
+        ->leftJoin('pd.Menu', 'm')
+        ->andWhere('p.Usuario = :usuario')
+        ->setParameter('usuario', $value);
 
-        if ($opc === 1) {
-            $query->andWhere('p.Estatus = :estatus')
-                ->setParameter('estatus', 'Pendiente');
-        } elseif ($opc === 2) {
-            $query->andWhere('p.Estatus = :estatus')
-                ->setParameter('estatus', 'Confirmado');
-        }
-
-        return $query
-            ->orderBy('p.id', 'ASC')
-            ->getQuery()
-            ->getResult();
+    if ($opc === 1) {
+        $query->andWhere('p.Estatus = :estatusPendiente')
+              ->andWhere('pd.Estatus = :estatusPd')
+              ->setParameter('estatusPendiente', 'Pendiente')
+              ->setParameter('estatusPd', true);
+    } elseif ($opc === 2) {
+        $query->andWhere('p.Estatus = :estatusConfirmado')
+              ->setParameter('estatusConfirmado', 'Confirmado');
     }
+
+    return $query
+        ->addSelect('pd', 'm')
+        ->orderBy('p.id', 'ASC')
+        ->getQuery()
+        ->getResult();
+}
+
 
 
 

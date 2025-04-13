@@ -10,7 +10,11 @@ body{
 }
 
 nav{
-    background-color: #FF914D;
+    top: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+    background-color: #ff914df0;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
 }
 

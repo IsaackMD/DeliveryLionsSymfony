@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request; 
 use PHPUnit\Util\Json;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 #[Route('/user')]
 class UserController extends AbstractController
@@ -45,140 +46,200 @@ class UserController extends AbstractController
 
         ]);
     }
-    #[Route('/Det/Com/{id}', name: 'app_det_comida')]
-    public function DetComida($id): Response
+    #[Route('/Det/Com/', name: 'app_det_comida')]
+    public function DetComida(Request $request): Response
     {
+        $id = $request->get('id');
+        // dump($id);
+        // die;
         $comida = $this->entityManager->getRepository(Menu::class)->findOneBy(['id' => $id]);
         $negocio = $comida->getNegocio();
         $comidas = $this->entityManager->getRepository(Menu::class)->findBy(['cat_comida' => $comida->getCatComida()]);
-        // dump($comidas);
-        // // dump($negocio);
+        // dump($comida);
+        // dump($negocio);
         // die;
-        return $this->render('user/detcomida.html.twig', [
-            'comida' => $comida,
-            'negocio' => $negocio,
-            'comidas' => $comidas
-        ]);
+        $data = [
+            'id' => $comida->getId(),
+            'nombre' => $comida->getNomMenu(),
+            'imagen' => $comida->getImagen() ,
+            'precio' => $comida->getPrecio(),
+            'descuento' => $comida->getDescuento(),
+            'preciofinal' => $comida->getPrecio()- ($comida->getPrecio()*(0.01 *$comida->getDescuento())),
+            'Negocio' => $negocio->getNegocio(),
+            'descripcion' => $comida->getDescrip(),
+            'complemento' => $comida->getComplemento(),
+        ];
+        // dump($data);
+        // die;
+        return new JsonResponse($data);
     }
 
     #[Route('/carrito', name :'app_carrito')]
-    public function Carrito(): JsonResponse{
+    public function Carrito(SessionInterface $session): JsonResponse{
         $user = $this->getUser();
-        $carrito = $this->entityManager->getRepository(Pedido::class)->findById($user,1);
-        $datos = [];
-        $total = 0;
-        if ($carrito != null){
-            foreach($carrito as $pedido){
-                $pedidoMenus = $pedido->getPedidoMenus();
-                foreach($pedidoMenus  as $pedidoMenu){
-                    $menu = $pedidoMenu->getMenu();
-                    $menus[] = [
-                        'id' => $menu->getId(),
-                        'nombre' => $menu->getNomMenu(),
-                        'imagen' => $menu->getImagen(),
-                        'precio' => $menu->getPrecio(),
-                        'complemento' => $menu->getComplemento(),
-                        'cantidad' => $pedidoMenu->getCantidad()
-                    ];
-                    $total += $pedidoMenu->getCantidad() * $menu->getPrecio();
-                }
-                
-            }
-            $datos[] = [
-                'id' => $pedido->getId(),
-                'menus' => $menus,
-                'total' => $total
+        if(!$user){
+            return new JsonResponse(['error' => 'No se ha iniciado sesión']);
+        }
+        $pedido = $this->entityManager->getRepository(Pedido::class)->findOneBy(['Usuario' => $user, 'Estatus' => 'Pendiente']);
+        $pedidoMenu = $this->entityManager->getRepository(PedidoMenu::class)->findBy(['Pedido' => $pedido, 'Estatus' => true]);
+        $carritoMenu = [];
+        foreach ($pedidoMenu as $menu) {
+            $carritoMenu[] = 
+            [
+                'id' => $menu->getMenu()->getId(),
+                'nombre' => $menu->getMenu()->getNomMenu(),
+                'imagen' => $menu->getMenu()->getImagen(),
+                'precio' => $menu->getMenu()->getPrecio() - ($menu->getMenu()->getPrecio() * (0.01 * $menu->getMenu()->getDescuento())),
+                'cantidad' => $menu->getCantidad(),
+                'pedidomenuId' => $menu->getId(),
             ];
         }
-
-        return new JsonResponse($datos);
-
+        $carrito[] = [
+            'id' => $pedido->getId(),
+            'total' => $pedido->getPrecio(),
+            'menus' => $carritoMenu
+        ];
+        
+        // dump($carrito);
+        // die;
+        
+        return new JsonResponse( $carrito);
     }
-    #[Route('/add/carrito', name: 'app_add_carrito')]
+    
+    #[Route('/add-to-carrito',name: 'add_to_carrito')]
     public function AddCarrito(Request $request): JsonResponse
     {
-        $cantidad = (int) $request->request->get('cantidad');
-        if ($cantidad <= 0) {
-            return new JsonResponse(['error' => 'Cantidad no válida'], Response::HTTP_BAD_REQUEST);
-        }
-        $menu = $this->entityManager->getRepository(Menu::class)->findOneBy(['id' => $request->request->get('MenuID')]);
-        if (!$menu) {
-            return new JsonResponse(['error' => 'Menú no encontrado'], Response::HTTP_NOT_FOUND);
-        }
-        // Obtener el usuario
-        $user = $this->getUser();
-        // Crear la entidad Pedido y PedidoMenu
-        $pedido = new Pedido();
-        $pedidoMenu = new PedidoMenu();
-        $pedido
-                ->addUsuario($user)
-               ->setEstatus('Pendiente')
-               ->setPrecio($menu->getPrecio() * $cantidad); // Ajuste del precio según la cantidad
+        $idProductos = $request->request->get('id');
+        $cantidad = $request->request->get('cantidad');
 
-        $pedidoMenu->setMenu($menu)
-                   ->setCantidad($cantidad);
-        $pedido->addPedidoMenu($pedidoMenu);
-        // Persistir en la base de datos
-        $this->entityManager->persist($pedido);
-        $this->entityManager->persist($pedidoMenu);
+        // verificar si el usuario esta logueado
+        $user = $this->getUser();
+        if (!$user) {
+            return new JsonResponse(['error' => 'Usuario no autenticado'], Response::HTTP_FORBIDDEN);
+        }
+        
+        // verificar si el usuario ya tiene un pedido en estado pendiente
+        $menu = $this->entityManager->getRepository(Menu::class)->findOneBy(['id' => $idProductos]);
+        if (!$menu) {
+            return new JsonResponse(['error' => 'Producto no encontrado'], Response::HTTP_NOT_FOUND);
+        }
+
+        $precioProducto = $menu->getPrecio() - ($menu->getPrecio() * 0.01 * $menu->getDescuento());
+        $precioProductoTotal = $precioProducto * $cantidad;
+
+
+        $pedido = $this->entityManager->getRepository(Pedido::class)->findOneBy(['Usuario' => $user, 'Estatus' => 'Pendiente']);
+
+        
+        iF($pedido){
+            // Modificar el precio del pedido existente
+            $pedido->setPrecio($pedido->getPrecio() + $precioProductoTotal);
+            $this->entityManager->persist($pedido);
+            $this->entityManager->flush();
+
+        }else{
+            $pedido = new Pedido();
+            $pedido->setUsuario($user)
+            ->setEstatus('Pendiente')
+            ->setPrecio($precioProductoTotal);
+            $this->entityManager->persist($pedido);
+        }
+        // verificar si el pedido existe, si no existe inicializar uno nuevo
+       
+        $pedidoMenuExist = $this->entityManager->getRepository(PedidoMenu::class)->findOneBy(['Pedido' => $pedido, 'Menu' => $menu, 'Estatus' => true]);
+        
+        if($pedidoMenuExist) {
+            // Si el menú ya existe en el pedido, actualizar la cantidad y calcula el precio total
+            $pedidoMenuExist->setCantidad($pedidoMenuExist->getCantidad() + $cantidad);
+            $this->entityManager->persist($pedidoMenuExist);
+            // $this->entityManager->flush();
+            // return new JsonResponse(['success' => true], Response::HTTP_OK);
+        }else{
+            $pedidoMenu = new PedidoMenu();
+            $pedidoMenu->setMenu($menu);
+            $pedidoMenu->setCantidad($cantidad);
+            $pedidoMenu->setPedido($pedido);
+            // Persistir en la base de datos
+            $this->entityManager->persist($pedidoMenu);
+        }
+
         $this->entityManager->flush();
-    
-        return new JsonResponse(['message' => 'Carrito añadido'], Response::HTTP_OK);
+        return new JsonResponse(['success' => true], Response::HTTP_OK);
     }
     
 
 
-    #[Route('/Delete/c{cid}/p{id}', name:'app_delete')]
-    public function Delete($cid,$id): JsonResponse
-    {    
-        $carrito = $this->entityManager->getRepository(Pedido::class)->findOneBy(['id'=> (int) $cid]);
-        if(!$carrito){
-            return new JsonResponse(['message' => 'Carrito no encontrado'], Response::HTTP_NOT_FOUND);
+    #[Route('/Delete/', name:'app_delete')]
+    public function Delete(Request $request): JsonResponse
+    {   
+        $id = $request->request->get('id');
+        $pedidoMenu = $this->entityManager->getRepository(PedidoMenu::class)->findOneBy(['id' => $id]);
+        if (!$pedidoMenu) {
+            return new JsonResponse(['error' => 'Pedido no encontrado'], Response::HTTP_NOT_FOUND);    
         }
-        $carrito->setEstatus('Cancelado');
-        $this->entityManager->persist($carrito);
+        $pedidoMenu->setEstatus(false);
+        $this->entityManager->persist($pedidoMenu);
         $this->entityManager->flush();
-        // regresar un resultado de exito un 200
         return new JsonResponse(Response::HTTP_OK);
     }
 
     #[Route('/DtCompra', name: 'app_detalle_compra')]
     public function DtCompra(): Response {
         $user = $this->getUser();
-        $carrito = $this->entityManager->getRepository(Pedido::class)->findById($user,1);
-        $total = 0.0;
-        $datos = [];
-        if ($carrito != null){
-            foreach($carrito as $pedido){
-                $pedidoMenus = $pedido->getPedidoMenus();
-                foreach($pedidoMenus  as $pedidoMenu){
-                    $menu = $pedidoMenu->getMenu();
-                    $menus[] = [
-                        'nombre' => $menu->getNomMenu(),
-                        'imagen' => $menu->getImagen(),
-                        'cantidad' => $pedidoMenu->getCantidad(),
-                        'Precio' => $pedidoMenu->getCantidad() * $menu->getPrecio()
-                    ];
-                    $total += $pedidoMenu->getCantidad() * $menu->getPrecio();
-                }
-            }
-            $datos[] = [
-                'id' => $pedido->getId(),
-                'Total' =>$total,
-                'menus' => $menus,
+        if (!$user) {
+            return new JsonResponse(['error' => 'No se ha iniciado sesión']);
+        }
+    
+        $pedido = $this->entityManager->getRepository(Pedido::class)->findOneBy([
+            'Usuario' => $user,
+            'Estatus' => 'Pendiente'
+        ]);
+    
+        if (!$pedido) {
+            return $this->render('user/detalleCompra.html.twig', ['pedidos' => null]);
+        }
+    
+        $pedidoMenus = $this->entityManager->getRepository(PedidoMenu::class)->findBy([
+            'Pedido' => $pedido,
+            'Estatus' => true
+        ]);
+    
+        $carritoMenu = [];
+        $total = 0;
+        $descuento = 0;
+    
+        foreach ($pedidoMenus as $menu) {
+            $precioOriginal = $menu->getMenu()->getPrecio();
+            $porcentajeDescuento = $menu->getMenu()->getDescuento();
+            $cantidad = $menu->getCantidad();
+    
+            $descuentoAplicado = $precioOriginal * (0.01 * $porcentajeDescuento);
+            $precioFinal = $precioOriginal - $descuentoAplicado;
+    
+            $carritoMenu[] = [
+                'nombre' => $menu->getMenu()->getNomMenu(),
+                'imagen' => $menu->getMenu()->getImagen(),
+                'Precio' => $precioFinal,
+                'cantidad' => $cantidad,
             ];
+    
+            $total += $precioFinal * $cantidad;
+            $descuento += $descuentoAplicado * $cantidad; // se multiplica por la cantidad
         }
-        if (empty($datos)){
-            return $this->render('user/detalleCompra.html.twig', [
-                'pedidos' => null
-            ]);
-        }
-        return $this->render('user/detalleCompra.html.twig',
-        [
-            'pedidos' => $datos[0],
-
+    
+        $carrito[] = [
+            'id' => $pedido->getId(),
+            'Total' => $total,
+            'descuento' => $descuento,
+            'menus' => $carritoMenu
+        ];
+    
+        return $this->render('user/detalleCompra.html.twig', [
+            'pedidos' => $carrito[0],
         ]);
     }
+    
+
 
     #[Route('/conf/pedido', name: 'app_conf')]
     public function confirmar(Request $request): Response{

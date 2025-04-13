@@ -53,13 +53,13 @@
             </div>
             <div class="detaCompra">
                 <p class="detp">Comidas: {{ pedidos.Total | number_format(2, '.', ',') }} MXN</p>
-                <p class="detp">Descuento: 0.0 MXN</p>
+                <p class="detp">Descuento: {{pedidos.descuento | number_format(2, '.', ',') }} MXN</p>
             </div>
             <div>
                 <div class="progress" style="height: 1px;">
                     <div class="progress-bar" role="progressbar" style="width: 100%; background: gray;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <h4>Total: <span style="color: green;">{{ pedidos.Total | number_format(2, '.', ',') }} MXN</span></h4>
+                <h4>Total: <span style="color: green;">{{ pedidos.Total }} MXN</span></h4>
                 <form method="post" action="{{ path('app_conf') }}">
                     <input type="hidden" value="{{ pedidos.id }}" name="idp" id="idp"/>
                     <input id="Vtotal" type="hidden" value="{{ pedidos.Total | number_format(2, '.', ',') }}" name="total"/>
@@ -77,7 +77,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+{# <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> #}
 <script src="https://www.paypal.com/sdk/js?client-id=AT80_Ft4nnChPuAUsVfhe3lsuB-HSPdLEQE9Paa9iwCpL3gS_jvSRbGrOXtP8_QgyhfopSGTzBdy23QG&currency=MXN" data-sdk-integration-source="button-factory"></script>
 <script>
     function initPayPalButton() {

@@ -12,8 +12,8 @@
         </a>
 
     </div>
-    <div style="margin: 25px auto; text-align: center;">
-                <h1 class="h3 mb-3 font-weight-normal text-white">Inicio de Sesión</h1>
+    <div class="titulo-con-lineas">
+        <span class="titulo">Inicio de sesión</span>
     </div>
     <form method="post" class="form_container">
         <div class="form-login">
@@ -35,8 +35,8 @@
 
                 <input type="hidden" name="_csrf_token"
                     value="{{ csrf_token('authenticate') }}">
-                <div class="btn-login">
-                    <button class="btn btn-lg btn-primary" type="submit">
+                <div class="content-btn-login">
+                    <button class="btn btn-lg btn-primary btn-login" type="submit">
                         Acceder
                     </button>
                 </div>

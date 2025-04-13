@@ -22,6 +22,9 @@ class PedidoMenu
     #[ORM\Column]
     private ?int $Cantidad = null;
 
+    #[ORM\Column]
+    private ?bool $Estatus = true;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class PedidoMenu
     public function setCantidad(int $Cantidad): static
     {
         $this->Cantidad = $Cantidad;
+
+        return $this;
+    }
+
+    public function isEstatus(): ?bool
+    {
+        return $this->Estatus;
+    }
+
+    public function setEstatus(bool $Estatus): static
+    {
+        $this->Estatus = $Estatus;
 
         return $this;
     }

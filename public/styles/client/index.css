@@ -1,20 +1,22 @@
-.content{
+.content {
     background-image: url("../../imgs/banner.webp");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     width: 100%;
 }
-.content-text{
+
+.content-text {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     padding: 60px;
-    color:white;
+    color: white;
     font-size: 35px;
 }
-.content h1{
+
+.content h1 {
     color: white;
     padding-top: 20px;
     font-size: 45px;
@@ -22,7 +24,8 @@
     font-weight: bolder;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
-.content h3{
+
+.content h3 {
     font-style: initial;
     padding: 10px;
     width: 100;
@@ -37,36 +40,40 @@
 }
 
 
-.search-content{
+.search-content {
     display: flex;
-     justify-content: end;
-     margin: 15px 120px 15px 0;
-     align-items: center;
-     min-height: 45px;
- }
- .search{
-     box-sizing: border-box;
-     display: flex;
-     justify-self: center;
-     align-items: center;
-     width: 60px;
-     height: 60px;
-     background: white;
-     border-radius: 8px;
-     padding: 10px 20px;
-     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-     transition: .5s ease-in-out;
- }
- .search:hover{
-     width: 550px;
- }
- .search button{
-     font-size: 25px;
-     border: none;
-     text-align: end;
-     background: transparent;
- }
- input{
+    justify-content: end;
+    margin: 15px 120px 15px 0;
+    align-items: center;
+    min-height: 45px;
+}
+
+.search {
+    box-sizing: border-box;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    background: white;
+    border-radius: 8px;
+    padding: 10px 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: .5s ease-in-out;
+}
+
+.search:hover {
+    width: 550px;
+}
+
+.search button {
+    font-size: 25px;
+    border: none;
+    text-align: end;
+    background: transparent;
+}
+
+input {
     width: 100%;
     height: 100%;
     color: black;
@@ -75,74 +82,76 @@
     outline: none;
     background: transparent;
 }
-i{
+
+i {
     font-size: 22px;
     color: black;
     cursor: pointer;
 }
 
-.main-content{
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    text-align: center;
-    margin-top:25px;
-}
-.afiliados-container {
-    width: 45%;
-}
-.afiliados-container h2, .comida-container h2{
+
+
+.afiliados-container h2,
+.comida-container h2 {
     font-size: 45px;
     color: white;
 }
-.afiliados-content{
+
+.afiliados-content {
     text-align: center;
     margin: 25px 0;
 }
-.afiliados-content h3{
-    color:white;
-    font-size:30px;
+
+.afiliados-content h3 {
+    color: white;
+    font-size: 30px;
 }
 
-.afiliados-content .text-content  p{
+.afiliados-content {
     text-align: justify;
-    margin: 15px 25px;
+    width: min-content;
+    margin: 15px 2.5rem;
     padding: 0 6rem;
 }
+
 .afiliados-content .img-content img {
     height: auto;
     width: 180px;
     border-radius: 50%;
 }
-.comida-container{
+
+.comida-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-content: flex-start;
     justify-content: center;
 }
-.title-food{
+
+.title-food {
     width: 100%;
-    margin: 15px 0;
 }
-.comida-container h2, .comida-content h2 {
+
+.comida-container h2,
+.comida-content h2 {
     font-size: 45px;
     color: white;
 }
+
 .comida-content {
-    width: 45%;
+    width: 40%;
+    height: 34.375rem;
     display: flex;
     flex-direction: row;
     background: #151212;
     flex-wrap: wrap;
     justify-content: center;
-    margin: auto;
+    margin: 1rem auto;
     border-radius: 30px;
     padding: 15px 0px;
 }
-.comida-content button{
+
+.comida-content button {
     padding: 15px 52px;
     margin-top: 8px;
     border-radius: 38px;
@@ -152,23 +161,36 @@ i{
     color: white;
     font-family: 'Poppins';
 }
-.comida-content .btn-content{
+
+.comida-content .btn-content {
     margin: 4px 0;
 }
-.comida-content .text-content{
+
+.comida-content .text-content {
     text-align: justify;
-    padding: 0 3.3rem;
+    /* padding: 0 3.3rem; */
 }
-.comida-content .img-content{
+
+.badge{
+    position: absolute;
+    margin: 10px !important;
+    padding: 10px !important;
+    border-radius: 1.5rem !important;
+    font-size: 1rem !important;
+}
+
+.comida-content .img-content {
     width: 80%;
     height: 50%;
     margin: 12px;
 }
-.comida-content .img-content img{
-    height: 100%;
+
+.comida-content .img-content img {
+    height: 250px;
     width: 100%;
     border-radius: 15px;
 }
+
 .carrusel-item {
     width: 355px !important;
 }
@@ -176,10 +198,12 @@ i{
 .glider-track {
     width: 100% !important;
 }
+
 .btn-content {
     padding: 15px;
 }
-.btn-content a{
+
+.btn-content a {
     text-decoration: none;
     color: white;
     font-size: 20px;
@@ -190,31 +214,71 @@ i{
     border-radius: 38px;
     border: none;
     background: #FF914D;
-    
+
 }
-.title h3{
+
+.title h3 {
     color: #FF914D;
     font-size: 30px;
     text-transform: capitalize;
 }
-.text-content p{
+
+.text-content p {
     text-align: justify;
-    padding: 0 1rem;
+    /* padding: 0 1rem; */
     font-size: 15px;
     color: white;
     font-weight: 400;
 }
-.text-content h3{
+
+.text-content h3 {
     text-align: center;
 }
+
 .afiliados-container {
     padding-left: 20px;
 }
-.afiliados-content .text-content p {
+
+.afiliados-content {
     text-align: justify;
     margin: 15px 25px;
-    padding: 0 0rem;
+    padding: 15px 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    background: #151212;
 }
-.Negocio-content{
+
+.Negocio-content {
     text-decoration: none;
+    text-align: center;
 }
+
+.main{
+    display: grid;
+    grid-template-areas: 
+        "header header"
+        "afiliados-container comida-container";
+    grid-template-columns: 1fr 3fr;
+    gap: 5px;
+    padding: 5px;
+    text-align: center;
+}
+
+.main > div {
+    padding: 10px;
+  }
+.main > div.header {
+    grid-area: header;
+    text-align: center;
+  }
+
+  .main > div.afiliados-container {
+    grid-area: afiliados-container;
+  }
+
+  .main > div.comida-container {
+    grid-area: comida-container;
+  }
