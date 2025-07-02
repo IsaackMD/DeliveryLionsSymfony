@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-<div class="container">
+<div class="container" style="margin: 7.5rem auto;">
     <div class="row row_detalleC ">
         <div class="col-8" style="background-color: white;">
         {% if pedidos is null %}
@@ -52,7 +52,7 @@
                 <div class="progress-bar" role="progressbar" style="width: 100%; background: gray;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <div class="detaCompra">
-                <p class="detp">Comidas: {{ pedidos.Total | number_format(2, '.', ',') }} MXN</p>
+                <p class="detp">Comidas: {{ pedidos.PrecioNormal | number_format(2, '.', ',') }} MXN</p>
                 <p class="detp">Descuento: {{pedidos.descuento | number_format(2, '.', ',') }} MXN</p>
             </div>
             <div>
@@ -63,7 +63,7 @@
                 <form method="post" action="{{ path('app_conf') }}">
                     <input type="hidden" value="{{ pedidos.id }}" name="idp" id="idp"/>
                     <input id="Vtotal" type="hidden" value="{{ pedidos.Total | number_format(2, '.', ',') }}" name="total"/>
-                    <button class="btn btn-success" type="submit">Pagar</button>
+                    {# <button class="btn btn-success" type="submit">Pagar</button> #}
                 </form>
                 <div id="smart-button-container">
                     <div style="text-align: center;">

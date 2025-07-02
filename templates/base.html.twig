@@ -55,10 +55,10 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
+    <header class="header">
+        {% include 'components/nav.html.twig' %}
+    </header>
     <body>
-        {# {% if app.user %} #}
-            {% include 'components/nav.html.twig' %}
-        {# {% endif %} #}
         {% block body %}{% endblock %}
     </body>
     {% include 'components/footer.html.twig' %}

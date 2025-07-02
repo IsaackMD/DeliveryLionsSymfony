@@ -5,12 +5,20 @@
 {% block body %}
 <div class="container">
     <div class="row">
-        <div class="col-12">
-            <h1>Mis pedidos</h1>
+        <div class="col-12 text-white" style="margin: 7.5rem auto;">
+            <h1>Mis pedidos <i class="fa-solid fa-boxes-stacked"></i></h1>
+            <form method="get" action="{{ path('app_pedido') }}" class="d-flex justify-content-end m-4">
+                <div class="col-10">
+                    <input type="text" name="search" class="form-control" placeholder="Buscar tu pedido......" aria-label="Search">
+                </div>
+                <div class="col-2 text-end">
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </div>
+            </form>
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">PedidoID</th>
+                        <th scope="col">ID</th>
                         <th scope="col">Menu</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col">Total</th>

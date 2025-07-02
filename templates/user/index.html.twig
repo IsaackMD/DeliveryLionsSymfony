@@ -242,15 +242,23 @@
                 cantidad: cantidadInput
             },
             success: function(response) {
-                console.log('Producto agregado al carrito:', response);
-                alert('Producto agregado al carrito exitosamente.');
+                
+                Swal.fire({
+                    title: "Agregado al carrito",
+                    text: "Agregaste un producto al carrito",
+                    icon: "success"
+                });
 
                 // También puedes recargar el contenido del carrito si tienes una función:
                 // cargarCarrito(); // <-- si tienes algo así, lo llamas aquí
             },
             error: function(xhr) {
-                console.error('Error al agregar al carrito:', xhr);
-                alert('Hubo un problema al agregar al carrito.');
+                Swal.fire({
+                    title: "Error",
+                    text: "Error al agregar al carrito. Por favor, inténtalo de nuevo.",
+                    icon: "error"
+                });
+                
             }
         });
     }

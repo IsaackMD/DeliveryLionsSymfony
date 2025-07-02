@@ -83,6 +83,9 @@ class UserController extends AbstractController
         $pedido = $this->entityManager->getRepository(Pedido::class)->findOneBy(['Usuario' => $user, 'Estatus' => 'Pendiente']);
         $pedidoMenu = $this->entityManager->getRepository(PedidoMenu::class)->findBy(['Pedido' => $pedido, 'Estatus' => true]);
         $carritoMenu = [];
+        if(!$pedidoMenu){
+            return new JsonResponse([]);
+        }
         foreach ($pedidoMenu as $menu) {
             $carritoMenu[] = 
             [
@@ -111,7 +114,7 @@ class UserController extends AbstractController
     {
         $idProductos = $request->request->get('id');
         $cantidad = $request->request->get('cantidad');
-
+        $directBuy = $request->request->get('directBuy');
         // verificar si el usuario esta logueado
         $user = $this->getUser();
         if (!$user) {
@@ -164,10 +167,11 @@ class UserController extends AbstractController
         }
 
         $this->entityManager->flush();
+        if($directBuy){
+            return new JsonResponse(['success' => true, 'redirect' => $this->generateUrl('app_detalle_compra')], Response::HTTP_OK);
+        }
         return new JsonResponse(['success' => true], Response::HTTP_OK);
     }
-    
-
 
     #[Route('/Delete/', name:'app_delete')]
     public function Delete(Request $request): JsonResponse
@@ -207,6 +211,7 @@ class UserController extends AbstractController
         $carritoMenu = [];
         $total = 0;
         $descuento = 0;
+        $precionormal = 0;
     
         foreach ($pedidoMenus as $menu) {
             $precioOriginal = $menu->getMenu()->getPrecio();
@@ -222,7 +227,7 @@ class UserController extends AbstractController
                 'Precio' => $precioFinal,
                 'cantidad' => $cantidad,
             ];
-    
+            $precionormal += $precioOriginal * $cantidad;
             $total += $precioFinal * $cantidad;
             $descuento += $descuentoAplicado * $cantidad; // se multiplica por la cantidad
         }
@@ -230,6 +235,7 @@ class UserController extends AbstractController
         $carrito[] = [
             'id' => $pedido->getId(),
             'Total' => $total,
+            'PrecioNormal' => $precionormal,
             'descuento' => $descuento,
             'menus' => $carritoMenu
         ];
@@ -272,18 +278,26 @@ class UserController extends AbstractController
         ]);
     }
     #[Route('/Pedidos', name: 'app_pedido')]
-    public function pedidos(): Response {
+    public function pedidos(Request $request): Response {
         $user = $this->getUser();
         if ($user === null) {
             return $this->redirectToRoute('app_login');
         }
+
+        if($request->query->has('search') && '' !== $request->query->has('search')){
+            $search = $request->query->get('search', '');
+            $pedidos = $this->entityManager->getRepository(Pedido::class)->findBySearch($search, $user);
+            if (!$pedidos) {
+                return $this->render('user/pedidos.html.twig', [
+                    'pedidos' => null,
+                ]);
+            }
+            return $this->render('user/pedidos.html.twig', [
+                'pedidos' => $pedidos,
+            ]);
+        }
         
         $pedidos = $this->entityManager->getRepository(Pedido::class)->findById($user, 2);
-        // // Verificar si $pedidos es un array y no null
-        // if ($pedidos === null) {
-        //     $this->addFlash('error', 'No se encontraron pedidos.');
-        //     return $this->redirectToRoute('app_home'); // Redirige a una página de inicio o error
-        // }
     
         return $this->render('user/pedidos.html.twig', [
             'pedidos' => $pedidos,

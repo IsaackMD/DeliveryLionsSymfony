@@ -1,94 +1,96 @@
 <link rel="stylesheet" href="{{ asset('styles/nav.css') }}"> 
-{% if app.user %}
-    {% if 'ROLE_ADMIN' in app.user.roles %}
-        <nav>
-            <ul class="sidebar">
-                <li class="close" onclick="hideSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
-                <li class="sections"><a href="#">Inicio</a></li>
-                <li class="sections"><a href="#">Afiliado</a></li>
-                <li class="sections"><a href="#">Clientes</a></li>
-                <li class="sections"><a href="{{path('app_logout')}}">Cerrar Sesión</a></li>
-            </ul>
-            <ul>
-                <li class="logo"><a href="#"><img src="{{ asset('imgs/logo.jpg') }}" alt=""></a></li>
-                <li class="sections hideOnMobile"><a href="#">Inicio</a></li>
-                <li class="sections hideOnMobile"><a href="#">Afiliado</a></li>
-                <li class="sections hideOnMobile"><a href="#">Clientes</a></li>
-                <li class="sections hideOnMobile"><a href="{{path('app_logout')}}">Cerrar Sesión</a></li>
-                <li class="sections menu-button" onclick=showSidebar()><a  href="#" ><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
-            </ul>
-        </nav>
-    {% elseif 'ROLE_USER' in app.user.roles%}
-        {% include 'user/carrito.html.twig' %}
-        <nav>
-            <ul class="sidebar">
-                <li class="close" onclick="hideSidebar()"><a href="{{path('app_user')}}"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
-                <li class="sections"><a href="{{path('app_user')}}">Inicio</a></li>
-                <li class="sections"><a href="#">Negocios</a></li>
-                <li class="sections"><a href="#">Pedidos</a></li>
-                <li class="sections"><a href="#">Perfil</a></li>
-                <li class="sections"><a href="{{path('app_logout')}}">Cerrar Sesión</a></li>
-            </ul>
-            <ul>
-                <li class="logo"><a href="#"><img src="{{ asset('imgs/logo.jpg') }}" alt=""></a></li>
-                <li class="sections hideOnMobile"><a href="{{path('app_user')}}"><i class="fa-solid fa-house"></i>Inicio</a></li>
-                <li class="sections hideOnMobile"><a href="#"><i class="fa-solid fa-burger"></i>Negocio</a></li>
-                <li class="sections hideOnMobile"><a href="#"><i class="fa-solid fa-boxes-stacked"></i>Pedidos</a></li>
-                <li class="sections hideOnMobile"><a href="#"><i class="fa-solid fa-user"></i>Perfil</a></li>
-                <li class="sections hideOnMobile">
-                    <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                        <i class="fa-solid fa-cart-shopping"></i>Carrito
-                    </a>
-                </li>
-                <li class="sections hideOnMobile"><a href="{{path('app_logout')}}"><i class="fa-solid fa-right-from-bracket"></i></a></li>
-                <li class="sections menu-button" onclick="showSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
-            </ul>
-        </nav>
+<div class="nav-container">
+    {% if app.user %}
+        {% if 'ROLE_ADMIN' in app.user.roles %}
+            <nav>
+                <ul class="sidebar">
+                    <li class="close" onclick="hideSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
+                    <li class="sections"><a href="#">Inicio</a></li>
+                    <li class="sections"><a href="#">Afiliado</a></li>
+                    <li class="sections"><a href="#">Clientes</a></li>
+                    <li class="sections"><a href="{{path('app_logout')}}">Cerrar Sesión</a></li>
+                </ul>
+                <ul>
+                    <li class="logo"><a href="#"><img src="{{ asset('imgs/logo.jpg') }}" alt=""></a></li>
+                    <li class="sections hideOnMobile"><a href="#">Inicio</a></li>
+                    <li class="sections hideOnMobile"><a href="#">Afiliado</a></li>
+                    <li class="sections hideOnMobile"><a href="#">Clientes</a></li>
+                    <li class="sections hideOnMobile"><a href="{{path('app_logout')}}">Cerrar Sesión</a></li>
+                    <li class="sections menu-button" onclick=showSidebar()><a  href="#" ><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
+                </ul>
+            </nav>
+        {% elseif 'ROLE_USER' in app.user.roles%}
+            {% include 'user/carrito.html.twig' %}
+            <nav>
+                <ul class="sidebar">
+                    <li class="close" onclick="hideSidebar()"><a href="{{path('app_user')}}"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
+                    <li class="sections"><a href="{{path('app_user')}}">Inicio</a></li>
+                    <li class="sections"><a href="#">Negocios</a></li>
+                    <li class="sections"><a href="{{path('app_pedido')}}">Pedidos</a></li>
+                    <li class="sections"><a href="#">Perfil</a></li>
+                    <li class="sections"><a href="{{path('app_logout')}}">Cerrar Sesión</a></li>
+                </ul>
+                <ul>
+                    <li class="logo"><a href="#"><img src="{{ asset('imgs/logo.jpg') }}" alt=""></a></li>
+                    <li class="sections hideOnMobile"><a href="{{path('app_user')}}"><i class="fa-solid fa-house"></i>Inicio</a></li>
+                    <li class="sections hideOnMobile"><a href="#"><i class="fa-solid fa-burger"></i>Negocio</a></li>
+                    <li class="sections hideOnMobile"><a href="{{path('app_pedido')}}"><i class="fa-solid fa-boxes-stacked"></i>Pedidos</a></li>
+                    <li class="sections hideOnMobile"><a href="#"><i class="fa-solid fa-user"></i>Perfil</a></li>
+                    <li class="sections hideOnMobile">
+                        <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                            <i class="fa-solid fa-cart-shopping"></i>Carrito
+                        </a>
+                    </li>
+                    <li class="sections hideOnMobile"><a href="{{path('app_logout')}}"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+                    <li class="sections menu-button" onclick="showSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
+                </ul>
+            </nav>
 
-    {% elseif 'ROLE_AFI' in app.user.roles %}
-        <nav>
-            <ul class="sidebar">
-                <li class="close" onclick="hideSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
-                <li class="sections"><a href="#">Inicio</a></li>
-                <li class="sections"><a href="#">Pedidos</a></li>
-                <li class="sections"><a href="#">Menú</a></li>
-                <li class="sections"><a href="#">Perfil</a></li>
-                <li class="sections"><a href="{{path('app_logout')}}">Cerrar Sesión</a></li>
-            </ul>
-            <ul>
-                <li class="logo"><a href="#"><img src="{{ asset('imgs/logo.jpg') }}" alt=""></a></li>
-                <li class="sections hideOnMobile"><a href="#">Inicio</a></li>
-                <li class="sections hideOnMobile"><a href="#">Pedidos</a></li>
-                <li class="sections hideOnMobile"><a href="#">Menú</a></li>
-                <li class="sections hideOnMobile"><a href="#">Perfil</a></li>
-                <li class="sections hideOnMobile"><a href="{{path('app_logout')}}">Cerrar Sesión</a></li>
-                <li class="sections menu-button" onclick=showSidebar()><a  href="#" ><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
-            </ul>
-        </nav>
-        {% endif %}
-{% else %}
-        <nav>
-            <ul class="sidebar">
-                <li class="close" onclick="hideSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
-                <li class="sections"><a href="{{path('app_index')}}">Inicio</a></li>
-                <li class="sections"><a href="#nosotros">Nosotros</a></li>
-                <li class="sections"><a href="#servicios">Servicios</a></li>
-                <li class="sections"><a href="#">Contacto</a></li>
-                <li class="sections"><a href="{{path('app_register')}}">Registrar</a></li>
-                <li class="sections"><a href="{{path('app_login')}}">Inicio de Sesión</a></li>
-            </ul>
-            <ul>
-                <li class="logo"><a href="#"><img src="{{ asset('imgs/logo.jpg') }}" alt=""></a></li>
-                <li class="sections hideOnMobile"><a href="{{path('app_index')}}">Inicio</a></li>
-                <li class="sections hideOnMobile"><a href="#nosotros">Nosotros</a></li>
-                <li class="sections hideOnMobile"><a href="#servicios">Servicios</a></li>
-                <li class="sections hideOnMobile"><a href="#">Contacto</a></li>
-                <li class="sections hideOnMobile"><a href="{{path('app_register')}}">Registrar</a></li>
-                <li class="sections hideOnMobile"><a href="{{path('app_login')}}">Inicio de Sesión</a></li>
-                <li class="sections menu-button" onclick=showSidebar()><a  href="#" ><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
-            </ul>
-        </nav>
-{% endif %}
+        {% elseif 'ROLE_AFI' in app.user.roles %}
+            <nav>
+                <ul class="sidebar">
+                    <li class="close" onclick="hideSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
+                    <li class="sections"><a href="#">Inicio</a></li>
+                    <li class="sections"><a href="#">Pedidos</a></li>
+                    <li class="sections"><a href="#">Menú</a></li>
+                    <li class="sections"><a href="#">Perfil</a></li>
+                    <li class="sections"><a href="{{path('app_logout')}}">Cerrar Sesión</a></li>
+                </ul>
+                <ul>
+                    <li class="logo"><a href="#"><img src="{{ asset('imgs/logo.jpg') }}" alt=""></a></li>
+                    <li class="sections hideOnMobile"><a href="#">Inicio</a></li>
+                    <li class="sections hideOnMobile"><a href="#">Pedidos</a></li>
+                    <li class="sections hideOnMobile"><a href="#">Menú</a></li>
+                    <li class="sections hideOnMobile"><a href="#">Perfil</a></li>
+                    <li class="sections hideOnMobile"><a href="{{path('app_logout')}}">Cerrar Sesión</a></li>
+                    <li class="sections menu-button" onclick=showSidebar()><a  href="#" ><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
+                </ul>
+            </nav>
+            {% endif %}
+    {% else %}
+            <nav>
+                {# <ul >
+                    <li class="close" onclick="hideSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
+                    <li class="sections"><a href="{{path('app_index')}}">Inicio</a></li>
+                    <li class="sections"><a href="{{path('app_index')}}#nosotros">Nosotros</a></li>
+                    <li class="sections"><a href="{{path('app_index')}}#servicios">Servicios</a></li>
+                    <li class="sections"><a href="#">Contacto</a></li>
+                    <li class="sections"><a href="{{path('app_register')}}">Registrar</a></li>
+                    <li class="sections"><a href="{{path('app_login')}}">Inicio de Sesión</a></li>
+                </ul> #}
+                <ul class="sidebar">
+                    <li class="logo"><a href="#"><img src="{{ asset('imgs/logo.jpg') }}" alt=""></a></li>
+                    <li class="sections hideOnMobile"><a href="{{path('app_index')}}">Inicio</a></li>
+                    <li class="sections hideOnMobile"><a href="{{path('app_index')}}#nosotros">Nosotros</a></li>
+                    <li class="sections hideOnMobile"><a href="{{path('app_index')}}#servicios">Servicios</a></li>
+                    <li class="sections hideOnMobile"><a href="#">Contacto</a></li>
+                    <li class="sections hideOnMobile"><a href="{{path('app_register')}}">Registrar</a></li>
+                    <li class="sections hideOnMobile"><a href="{{path('app_login')}}">Inicio de Sesión</a></li>
+                    <li class="sections menu-button" onclick=showSidebar()><a  href="#" ><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
+                </ul>
+            </nav>
+    {% endif %}
+</div>
 <script src="https://cdn.jsdelivr.net/npm/glider-js@1.7.8/glider.min.js"></script>
 
 <script>

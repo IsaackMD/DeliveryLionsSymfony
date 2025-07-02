@@ -39,6 +39,8 @@ $(document).ready(function() {
             if (data == null || data.length === 0) {
                 $('#carrito-content').html('<p>No hay productos en el carrito.</p>');
                 $('#btnCompra').prop('disabled', true);
+                $('#offcanvasRightLabel').text('Tu Carrito (0)');
+                $('#total').text('$ 0.00 MXN');
                 return;
             }
             // Itera sobre los elementos del carrito
@@ -81,7 +83,7 @@ $(document).ready(function() {
 
 function eliminar(id) {
     $.ajax({
-        url: '{{ path("add_to_carrito") }}',
+        url: '{{ path("app_delete") }}',
         type: "DELETE",
         data:{
             id: id

@@ -37,7 +37,9 @@ public function findById(User $value, int $opc): array
               ->setParameter('estatusPd', true);
     } elseif ($opc === 2) {
         $query->andWhere('p.Estatus = :estatusConfirmado')
-              ->setParameter('estatusConfirmado', 'Confirmado');
+                ->andWhere('pd.Estatus = :estatusPd')
+              ->setParameter('estatusConfirmado', 'Confirmado')
+              ->setParameter('estatusPd', true);
     }
 
     return $query
@@ -47,6 +49,24 @@ public function findById(User $value, int $opc): array
         ->getResult();
 }
 
+public function findBySearch(string $value, User $user): array
+{
+    return $this->createQueryBuilder('p')
+        ->leftJoin('p.pedidoMenus', 'pd')
+        ->leftJoin('pd.Menu', 'm')
+        ->addSelect('pd', 'm')
+        ->andWhere('m.NomMenu LIKE :val')
+        ->andWhere('p.Usuario = :user')
+        ->andWhere('p.Estatus = :estatus')
+        ->andWhere('pd.Estatus = :estatusPd')
+        ->setParameter('val', '%' . $value . '%')
+        ->setParameter('user', $user)
+        ->setParameter('estatus', 'Confirmado')
+        ->setParameter('estatusPd', true)
+        ->orderBy('p.id', 'ASC')
+        ->getQuery()
+        ->getResult();
+}
 
 
 
