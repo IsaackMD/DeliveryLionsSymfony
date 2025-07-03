@@ -42,7 +42,24 @@
 
 body{
     background-color: #292828 !important;
+    font-family: 'Poppins', sans-serif;
 }
-btn-back-content{
-    
+h1, h2, h3 {
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+p, span, a, input, label {
+    font-weight: 400;
+}
+
+
+.back_btn {
+    background: #ff2929;
+    background: linear-gradient(90deg,rgba(255, 41, 41, 1) 50%, rgba(252, 69, 109, 1) 100%);
+    padding: 5px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
 }

@@ -22,15 +22,15 @@
         {% elseif 'ROLE_USER' in app.user.roles%}
             {% include 'user/carrito.html.twig' %}
             <nav>
-                <ul class="sidebar">
+                {# <ul >
                     <li class="close" onclick="hideSidebar()"><a href="{{path('app_user')}}"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
                     <li class="sections"><a href="{{path('app_user')}}">Inicio</a></li>
                     <li class="sections"><a href="#">Negocios</a></li>
                     <li class="sections"><a href="{{path('app_pedido')}}">Pedidos</a></li>
                     <li class="sections"><a href="#">Perfil</a></li>
                     <li class="sections"><a href="{{path('app_logout')}}">Cerrar Sesión</a></li>
-                </ul>
-                <ul>
+                </ul> #}
+                <ul class="sidebar" style="display: flex;">
                     <li class="logo"><a href="#"><img src="{{ asset('imgs/logo.jpg') }}" alt=""></a></li>
                     <li class="sections hideOnMobile"><a href="{{path('app_user')}}"><i class="fa-solid fa-house"></i>Inicio</a></li>
                     <li class="sections hideOnMobile"><a href="#"><i class="fa-solid fa-burger"></i>Negocio</a></li>

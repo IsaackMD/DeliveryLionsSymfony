@@ -23,26 +23,5 @@
     margin-top: 20px;
     
 }
-.back_btn {
-    background: #ff2929 ;
-    background: linear-gradient(90deg,rgba(255, 41, 41, 1) 50%, rgba(252, 69, 109, 1) 100%) ;
-    padding: 5px 15px;
-    margin: 5px;
-    border-radius: 5px;
-    color: white;
-    text-decoration: none;
-}
 
-.login_form input[type="text"], input[type="password"] {
-    position: relative;
-    height: 40px;
-    width: 100%;
-    outline: none;
-    font-size: 1rem;
-    color: black;
-    background-color: #FFF7F2;
-    margin-top: 8px;
-    border: 1px solid #935230;
-    border-radius: 6px;
-    padding: 0px 5px;
-}
+

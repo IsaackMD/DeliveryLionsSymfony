@@ -2,6 +2,7 @@
 
 {% block title %}Inicio{% endblock %}
  {% block stylesheets %}
+
  <link rel="stylesheet" href="{{ asset('styles/index.css') }}"> 
  {% endblock %}
 {% block body %}
@@ -76,12 +77,23 @@
                     <a class="link-servicios" href="{{path('app_index_servicios')}}">Más información</a>
                 </div>
                 <div class="servicios-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-truck" width="150" height="150" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ff9300" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-truck icon-hover" width="150" height="150" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <defs>
+                            <linearGradient id="gradiente-stroke" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#FF914D" />
+                            <stop offset="100%" stop-color="#FF5E62" />
+                            </linearGradient>
+
+                            <linearGradient id="gradiente-stroke-hover" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#FF5E62" />
+                            <stop offset="100%" stop-color="#FFD700" />
+                            </linearGradient>
+                        </defs>
+
                         <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
                         <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
                         <path d="M5 17h-2v-11a1 1 0 0 1 1 -1h9v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" />
-                      </svg>
+                    </svg>
                       <br>
                     <h4 style="color: white;">Envíos express</h4>
                     <br>
@@ -124,4 +136,27 @@
         
     </main>
     <script src="https://cdn.jsdelivr.net/npm/glider-js@1.7.8/glider.min.js"></script>
+    <script>
+    $(document).ready(function () {
+
+        $('.content h1').addClass('visible');
+
+        function mostrarParrafos() {
+        $('.nosotros .texto p').each(function () {
+            const topElemento = $(this).offset().top;
+            const topVentana = $(window).scrollTop() + $(window).height();
+
+            if (topElemento < topVentana - 50) {
+            $(this).addClass('visible');
+            }
+        });
+        }
+        setTimeout(() => {
+            $('.content h3').addClass('visible');
+        }, 500); // Retraso para h3
+        // Ejecuta al cargar y al hacer scroll
+        mostrarParrafos();
+        $(window).on('scroll', mostrarParrafos);
+    });
+    </script>
 {% endblock %}
