@@ -45,6 +45,12 @@ class Negocio
     #[ORM\Column(length: 255)]
     private ?string $descripcion = null;
 
+    #[ORM\Column(length: 10, nullable: true)]
+    private ?string $Telefono = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Direccion = null;
+
     public function __construct()
     {
         $this->Usuario = new ArrayCollection();
@@ -191,6 +197,30 @@ class Negocio
     public function setDescripcion(string $descripcion): static
     {
         $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    public function getTelefono(): ?string
+    {
+        return $this->Telefono;
+    }
+
+    public function setTelefono(?string $Telefono): static
+    {
+        $this->Telefono = $Telefono;
+
+        return $this;
+    }
+
+    public function getDireccion(): ?string
+    {
+        return $this->Direccion;
+    }
+
+    public function setDireccion(?string $Direccion): static
+    {
+        $this->Direccion = $Direccion;
 
         return $this;
     }

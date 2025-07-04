@@ -6,8 +6,16 @@
 
  {% endblock %}
 {% block body %}
-{% include 'components/Modals/ModalComida.html.twig' %}
+{# --------------------------> Modal de Comida <-------------------------- #}
 
+    {# ------------ # Modal de Negocios # ------------ #}
+    {% include 'components/Modals/ModalRestaurante.html.twig' %}
+
+    {# ------------ # Modal de Comida # ------------ #}
+    {% include 'components/Modals/ModalComida.html.twig' %}
+
+
+    {# ------------ # Seccion de Negocios # ------------ #}
     <section id="inicio" class="content"> 
         <div class="content-text">
             <h1>BIENVENIDO DELIVERY LIONS</h1>
@@ -16,253 +24,148 @@
             <h3>Vendemos Cualquier comida</h3>
         </div>
     </section>
-<main class="main">
-    <div class="content-header">
-        <section id="categoria">
-            <div class="content-text">
-                <h3>Categoría</h3>
-            </div>
-            <div class="carrusel">
-                <div class="carrusel-list" id="carrusel-list">
-                    <button class="carrusel-arrow carrusel-prev" id="button-prev" data-button="button-prev"
-                        onclick="">
-                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left"
-                            class="svg-inline--fa fa-chevron-left fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 320 512">
-                            <path fill="currentColor"
-                                d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="carrusel-track" id="track">
-                        {% for categoria in categorias %}
-                        <div class="carrusel-item">
-                            <div >
-                                <a href="">
-                                    <picture>
-                                        <img src="{{ asset('imgs/icons/' ~ categoria.imagen) }}" alt="Comida extranjera">
-                                    </picture>
-                                </a>
+
+    <main class="main">
+        <div class="content-header">
+            {# ------------ # Carrusel de Categorías # ------------ #}   
+            <section id="categoria">
+                <div class="content-text">
+                    <h3>Categoría</h3>
+                </div>
+                <div class="carrusel">
+                    <div class="carrusel-list" id="carrusel-list">
+                        <button class="carrusel-arrow carrusel-prev" id="button-prev" data-button="button-prev"
+                            onclick="">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left"
+                                class="svg-inline--fa fa-chevron-left fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 320 512">
+                                <path fill="currentColor"
+                                    d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z">
+                                </path>
+                            </svg>
+                        </button>
+                        <div class="carrusel-track" id="track">
+                            {% for categoria in categorias %}
+                            <div class="carrusel-item">
+                                <div >
+                                    <a href="">
+                                        <picture>
+                                            <img src="{{ asset('imgs/icons/' ~ categoria.imagen) }}" alt="Comida extranjera">
+                                        </picture>
+                                    </a>
+                                </div>
                             </div>
+                            {% endfor %}
                         </div>
-                        {% endfor %}
+                        <button class="carrusel-arrow carrusel-next" id="button-next" data-button="button-next"
+                            onclick="">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
+                                class="svg-inline--fa fa-chevron-right fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 320 512">
+                                <path fill="currentColor"
+                                    d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z">
+                                </path>
+                            </svg>
+                        </button>
                     </div>
-                    <button class="carrusel-arrow carrusel-next" id="button-next" data-button="button-next"
-                        onclick="">
-                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
-                            class="svg-inline--fa fa-chevron-right fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 320 512">
-                            <path fill="currentColor"
-                                d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z">
-                            </path>
-                        </svg>
-                    </button>
                 </div>
-                {# <div role="tablist" class="carousel__indicadores"></div> #}
-            </div>
-        </section>
-        <form action = "" method="get">
-            <div class="search-content">
-                <div class="search">
-                    <input type="text"  name="search" placeholder="Buscar">
-                    <button type="submit" class="fa-solid fa-magnifying-glass"></button>
+            </section>
+
+            {# ------------ # Barra de busqueda # ------------ #}
+            <form action = "" method="get">
+                <div class="search-content">
+                    <div class="search">
+                        <input type="text"  name="search" placeholder="Buscar">
+                        <button type="submit" class="fa-solid fa-magnifying-glass"></button>
+                    </div>
                 </div>
-            </div>
-        </form>
-    </div>
-    {# <div class="main-content"> #}
-    <div class="afiliados-container">
-        <h2>Negocios</h2>
-        {% for Negocio in Negocios%}
-            <div class="afiliados-content">
-                <a class="Negocio-content" href="{{path('app_Negocio', {'id' : Negocio.id})}}">
-                    <div class="img-content"><img src="{{asset('imgs/NegocioFotos/' ~ Negocio.imagen )}}" alt="imagen afiliados"></div>
-                    <div class="text-content">
+            </form>
+        </div>
+        {# ------------ # Seccion de Negocios # ------------ #}
+        <div class="afiliados-container">
+            <h2>Negocios</h2>
+            {% for Negocio in Negocios %}
+                <div class="afiliados-content">
+                    <a class="Negocio-content" 
+                        role="button" 
+                        data-restaurante="{{ Negocio.id }}"
+                        onClick="mostrarDetRestaurante(this)">
+                        <div class="img-content">
+                            <img src="{{asset('imgs/NegocioFotos/' ~ Negocio.imagen )}}" alt="imagen afiliados">
+                        </div>
+                        <div class="text-content">
                             <h3>{{Negocio.Negocio}}</h3>
                             <p>{{Negocio.descripcion}}</p>
-                    </div>
-                </a>
-            </div>
-        {% endfor %}
-    </div>
-    <div class="comida-container">
-        <div class="title-food">
-            <h2>Comida</h2>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
         </div>
+
+        {# ------------ # Seccion de Comida # ------------ #}
+        <div class="comida-container">
+            <div class="title-food">
+                <h2>Comida</h2>
+            </div>
             {% for comida in comidas%}
-            <div class="comida-content">
-                <div class="img-content"> 
-                    
+                <div class="comida-content">
+                    <div class="img-content">     
                         {% if (comida.descuento > 0) %}
                             <span class="badge bg-success">-{{comida.descuento}}%</span>
                         {% endif %}    
                         <img src="{{asset('imgs/MenuFotos/' ~ comida.Imagen)}}" alt="imagen comida">
                         <input type="hidden" id="MenuID" name="MenuID" value="{{ comida.id }}"/>
                     </div>
-                <div class="info-container">
-                    <div class="title">
-                        <h3>{{ comida.NomMenu}}</h3>
+
+                    <div class="info-container">
+                        <div class="title">
+                            <h3>{{ comida.NomMenu}}</h3>
+                        </div>
+                        <div class="text-content">
+                            <p style="margin: 1.25rem 2.5rem;">{{comida.Descrip}}</p>
+                        </div>
+                        <div class="text-content" 
+                            style="text-align: justify; padding: 0 4rem; display: flex; align-items: center; justify-content: space-evenly;">
+                            {% if (comida.descuento > 0) %}
+                            <p style="">
+                                ${{ comida.precio - (comida.precio * (0.01 * comida.descuento)) }} MXN
+                            </p>
+                            <p style="text-decoration: line-through;">${{comida.precio}}MXN</p>
+                            {% else %}
+                            <p style="">${{comida.precio}}MXN</p>
+                            {% endif %}
+                        </div>
+                        <div class="btn-content">
+                            <a data-bs-toggle="modal" role="button" 
+                                data-id="{{ comida.id }}"
+                                onClick="mostrarDetComida(this)"
+                            >
+                                Ver
+                            </a>
+                            <a role="button" 
+                                style="margin-left:5px; padding: 10px 14px !important; background-color: #198754" 
+                                onClick="addCart({{ comida.id }})" >
+                                <i class="fa-solid fa-circle-plus"></i>
+                            </a>
+                        </div>
                     </div>
-                    <div class="text-content">
-                        <p style="margin: 1.25rem 2.5rem;">{{comida.Descrip}}</p>
-                    </div>
-                    <div class="text-content" style="text-align: justify; padding: 0 4rem; display: flex; align-items: center; justify-content: space-evenly;">
-                        {% if (comida.descuento > 0) %}
-                        <p style="">
-                            ${{ comida.precio - (comida.precio * (0.01 * comida.descuento)) }} MXN
-                        </p>
-                        <p style="text-decoration: line-through;">${{comida.precio}}MXN</p>
-                        {% else %}
-                        <p style="">${{comida.precio}}MXN</p>
-                        {% endif %}
-                    </div>
-                <div class="btn-content">
-                    <a data-bs-toggle="modal" role="button" data-id="{{ comida.id }}" role="button" onClick="mostrarDetComida(this)">
-                        Ver
-                    </a>
-                    <a role="button" style="margin-left:5px; padding: 10px 14px !important; background-color: #198754" Onclick="addCart({{ comida.id }})" >
-                        <i class="fa-solid fa-circle-plus"></i>
-                    </a>
                 </div>
-                </div>
-            </div>
             {% endfor %}
-        {# </div> #}
-</main>
-<script src="https://cdn.jsdelivr.net/npm/glider-js@1.7.8/glider.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var select = document.querySelector('#options-type-select');
-        if (select) {
-            var glide = new Glide('.carrusel-list', {
-                type: select.value,
-                focusAt: 'center',
-                perView: 1,
-                slidesToScroll: 1,
-                scrollLock: true,
-                dots: '#resp-dots',
-                arrows: {
-                    prev: '.glider-prev',
-                    next: '.glider-next'
-                },
-                responsive: [
-                    {
-                        breakpoint: 775,
-                        settings: {
-                            slidesToShow: 'auto',
-                            slidesToScroll: 'auto',
-                            itemWidth: 150,
-                            duration: 0.25
-                        }
-                    },
-                    {
-                        breakpoint: 1024,
-                        settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 1,
-                            itemWidth: 150,
-                            duration: 0.25
-                        }
-                    }
-                ]
-            });
+        </div>
+    </main>
 
-            // Event listener for select change
-            select.addEventListener('change', function(event) {
-                glide.update({
-                    type: event.target.value
-                });
-            });
-
-            // Mount the Glide carousel
-            glide.mount();
-        }
-    });
-
-    function mostrarDetComida(element) {
-        const idComida = element.getAttribute('data-id');
-
-        $.ajax({
-            url: "{{ path('app_det_comida') }}",
-            type: 'GET',
-            data: { id: idComida },
-            success: function (data) {
-                // Actualizar título del modal
-                document.getElementById('modalDetalleComidaTitle').innerText = data.nombre;
-                
-                $('#descp').siblings('p').remove(); // elimina los <p> extra después de descp
-
-                // Actualizar imagen
-                const imgRuta = "{{ asset('imgs/MenuFotos/') }}" + data.imagen;
-                $('#modalDetalleComidaBody img').attr('src', imgRuta);
-
-                // Actualizar texto del negocio
-                $('.span_detNe').html('Negocio: <strong>' + data.Negocio + '</strong>');
-
-                // Actualizar descripción
-                $('#descp').text(data.descripcion);
-
-                // Agregar complemento si existe
-                let contenidoExtra = '';
-                if (data.complemento) {
-                    contenidoExtra += `<p><strong>Complemento:</strong> ${data.complemento}</p>`;
-                }
-
-                // Agregar contenido adicional (si quieres más info ahí)
-                contenidoExtra += `<p>¡Disfruta esta deliciosa comida!</p>`;
-                $('#descp').after(contenidoExtra);
-
-                $('#MenuID').val(data.id); // Actualizar el valor del input oculto
-                // Actualizar botón de precio
-                $('#btnAgregar').html(`Comprar $${data.preciofinal} MXN`);
-
-                // Mostrar el modal
-                $('#modalDetalleComida').modal('show');
-            },
-            error: function (xhr, status, error) {
-                console.error('Error al cargar el detalle de la comida:', error);
-            }
-        });
-    }
-
-    function addCart(idInput) {
-        const cantidadInput = 1;
-
-        if (!cantidadInput || !idInput) {
-            alert('Faltan datos para agregar al carrito.');
-            console.log('Cantidad:', cantidadInput, 'ID:', idInput);
-            return;
-        }
-
-        $.ajax({
-            url: '{{ path("add_to_carrito") }}',
-            type: 'POST',
-            data: {
-                id: idInput,
-                cantidad: cantidadInput
-            },
-            success: function(response) {
-                
-                Swal.fire({
-                    title: "Agregado al carrito",
-                    text: "Agregaste un producto al carrito",
-                    icon: "success"
-                });
-
-                // También puedes recargar el contenido del carrito si tienes una función:
-                // cargarCarrito(); // <-- si tienes algo así, lo llamas aquí
-            },
-            error: function(xhr) {
-                Swal.fire({
-                    title: "Error",
-                    text: "Error al agregar al carrito. Por favor, inténtalo de nuevo.",
-                    icon: "error"
-                });
-                
-            }
-        });
-    }
-
-</script>
+    {% block javascripts %}
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="{{ asset('js/users/UserIndex.js')}}"></script>
+        <script>
+            const PathDetalleComida = "{{ path('app_det_comida') }}";
+            const rutaDetalleNegocio = "{{ path('app_detalle_negocio') }}";
+            const AddToCart = "{{ path('add_to_carrito') }}";
+            const imgRutaComida = "{{ asset('imgs/MenuFotos/') }}";
+            const imgRutaNegocio = "{{ asset('imgs/NegocioFotos/') }}";
+        </script>
+    {% endblock %}
 
 {% endblock %}

@@ -5,97 +5,31 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.6.0/dist/css/glide.core.min.css">
 {% endblock %}
 
-<div class="modal fade" id="modalDetalleComida" tabindex="-1" role="dialog" aria-labelledby="modalDetalleComidaTitle" aria-hidden="true">
+<div class="modal fade" id="ModalDetalleNegocio" tabindex="-1" role="dialog" aria-labelledby="ModalDetalleNegocio" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog modal-xl" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="modalDetalleComidaTitle">Nombre de la comida </h5>
-            <input id="MenuID" type="hidden" value= "" name="MenuID"/>
+            <h5 class="modal-title" id="TituloNegocio">Nombre del negocio</h5>
+            <input id="NegocioID" type="hidden" name="NegocioID"/>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="modal" aria-label="Close">
             </button>
         </div>
-        <div class="modal-body modal-body-detC" id="modalDetalleComidaBody">
+        <div class="modal-body modal-body-detC" id="ImagenNegocio">
             <div>
                 <img src="https://media.istockphoto.com/id/1495039189/es/vector/sin-icono-de-foto-c%C3%A1mara-tachada-trazo-editable-estilo-de-l%C3%ADnea.jpg?s=612x612&w=0&k=20&c=lQz2Swo7c6dAaHHOjd89wi-NOdjbv1OyYskqsqhzt_E=" alt="imagen comida" class="img-fluid">
             </div>
             <div >
-                <span class="span_detNe"> Negocio:</span>
+                <span class="TelefonoNegocio"> Negocio:</span>
                 <hr>
                 Descripcion:
-                <p>Contenido del detalle de la comida...</p>
-                <p id="descp">Descripcion</p>
+                <p id="Descripcion">Descripcion</p>
+                <p id="Direccion"></p>
             </div>
         </div>
         <div class="modal-footer">
-            <div style="display: flex; flex-direction: row; align-items: center;">
-                <span style="color: white;"> Cantidad: </span>
-                <input id="cantidad" type="number" value = "1" class="form-control input_number" name="cantidad" min="1" max="99" />
-            </div>
             <button type="button" class="btn btn-secondary" id="btnAgregarSeguirC" onClick="addKeepBuying()">Agregar y seguir comprando</button>
             <button type="button" class="btn btn-success" id="btnAgregar" onClick="DirectBuy()">Comprar $PrecioMXN</button>
         </div>
     </div>
   </div>
 </div>
-<script>
-function addKeepBuying() {
-    const cantidadInput = $('#cantidad').val();
-    const idInput = $('#MenuID').val();
-
-    // Validación simple
-    if (!cantidadInput || !idInput) {
-        alert('Faltan datos para agregar al carrito.');
-        return;
-    }
-    console.log('Cantidad:', cantidadInput, 'ID:', idInput);
-    $.ajax({
-        url: '{{ path("add_to_carrito") }}',
-        type: 'POST',
-        data: {
-            id: idInput,
-            cantidad: cantidadInput
-        },
-        success: function(response) {
-            console.log('Producto agregado al carrito:', response);
-            // Opcional: cerrar modal
-            $('#modalDetalleComida').modal('hide');
-            // Opcional: notificación de éxito
-        },
-        error: function(xhr) {
-            console.error('Error al agregar al carrito:', xhr);
-            alert('Hubo un problema al agregar al carrito.');
-        }
-    });
-}
-function DirectBuy(){
-    const cantidadInput = $('#cantidad').val();
-    const idInput = $('#MenuID').val();
-
-    const directBuy = true;
-    // Validación simple
-    if (!cantidadInput || !idInput) {
-        alert('Faltan datos para agregar al carrito.');
-        return;
-    }
-    console.log('Cantidad:', cantidadInput, 'ID:', idInput);
-    $.ajax({
-        url: '{{ path("add_to_carrito") }}',
-        type: 'POST',
-        data: {
-            id: idInput,
-            cantidad: cantidadInput,
-            directBuy: directBuy
-        },
-        success: function(response) {
-            if(response.success && response.redirect){
-                // Redirige a la URL especificada
-                window.location.href = response.redirect;
-            }
-        },
-        error: function(xhr) {
-            console.error('Error al agregar al carrito:', xhr);
-            alert('Hubo un problema al agregar al carrito.');
-        }
-    });
-}
-</script>

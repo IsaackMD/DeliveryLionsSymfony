@@ -2,8 +2,7 @@
 
 {% block title %}Inicio{% endblock %}
  {% block stylesheets %}
-
- <link rel="stylesheet" href="{{ asset('styles/index.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('styles/index.css') }}"> 
  {% endblock %}
 {% block body %}
 
@@ -135,28 +134,31 @@
 
         
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/glider-js@1.7.8/glider.min.js"></script>
-    <script>
-    $(document).ready(function () {
+    {% block javascripts %}
+        <script src="https://cdn.jsdelivr.net/npm/glider-js@1.7.8/glider.min.js"></script>
+        <script>
+            $(document).ready(function () {
 
-        $('.content h1').addClass('visible');
+                $('.content h1').addClass('visible');
 
-        function mostrarParrafos() {
-        $('.nosotros .texto p').each(function () {
-            const topElemento = $(this).offset().top;
-            const topVentana = $(window).scrollTop() + $(window).height();
+                setTimeout(() => {
+                    $('.content h3').addClass('visible');
+                }, 500);
 
-            if (topElemento < topVentana - 50) {
-            $(this).addClass('visible');
-            }
-        });
-        }
-        setTimeout(() => {
-            $('.content h3').addClass('visible');
-        }, 500); // Retraso para h3
-        // Ejecuta al cargar y al hacer scroll
-        mostrarParrafos();
-        $(window).on('scroll', mostrarParrafos);
-    });
-    </script>
+                function mostrarParrafos() {
+                    $('.nosotros .texto p').each(function () {
+                        const topElemento = $(this).offset().top;
+                        const topVentana = $(window).scrollTop() + $(window).height();
+
+                        if (topElemento < topVentana - 50 && !$(this).hasClass('visible')) {
+                            $(this).addClass('visible');
+                        }
+                    });
+                }
+
+                mostrarParrafos(); // al cargar
+                $(window).on('scroll', mostrarParrafos);
+            });
+        </script>
+    {% endblock %}
 {% endblock %}

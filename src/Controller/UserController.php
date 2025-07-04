@@ -31,12 +31,9 @@ class UserController extends AbstractController
     {
         $comidas = $this->entityManager->getRepository(Menu::class)->findAll();
         $Negocios = $this->entityManager->getRepository(Negocio::class)->findBy(['Estatus' => true]);
-        // dump($Negocios);
-        // die;
+
     
         // Obtener el carrito asociado al usuario (aquí necesitas adaptar esta parte según cómo se almacenan los carritos en tu aplicación)
-        
-
         $categorias = $this->entityManager->getRepository(CatComida::class)->findAll();
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',
@@ -262,20 +259,26 @@ class UserController extends AbstractController
         return new JsonResponse(Response::HTTP_OK);
     }
     
-    #[Route('/D/N{id}', name:'app_Negocio')]
-    public function Negocio($id): Response{
-        $negocio = $this->entityManager->getRepository(Negocio::class)->findOneBy(['id' => $id]);
+    #[Route('/Detalle/Negocio', name:'app_detalle_negocio')]
+    public function Negocio(Request $request): Response
+    {
+        $NegocioID = $request->query->get('id');
+        $negocio = $this->entityManager->getRepository(Negocio::class)->findOneBy(['id' => $NegocioID, 'Estatus' => true]);
         $categoriaComida = $negocio->getCatComida()[0];
         if(!$negocio){
             return new JsonResponse(['error' => 'Negocio no encontrado'], Response::HTTP_NOT_FOUND);
         }
-        // dd($negocio);
-        // die;
-        return $this->render('user/detalleNegocios.html.twig',
-        [
-            'negocio' => $negocio,
-            'catComida' => $categoriaComida
-        ]);
+        $data = [
+            'id' => $negocio->getId(),
+            'nombre' => $negocio->getNegocio(),
+            'imagen' => $negocio->getImagen(),
+            'descripcion' => $negocio->getDescripcion(),
+            'direccion' => $negocio->getDireccion(),
+            'telefono' => $negocio->getTelefono(),
+            'categoriaComida' => $categoriaComida->getCategoria(),
+        ];
+
+        return new JsonResponse($data);
     }
     #[Route('/Pedidos', name: 'app_pedido')]
     public function pedidos(Request $request): Response {
