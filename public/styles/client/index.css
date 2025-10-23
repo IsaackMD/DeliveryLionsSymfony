@@ -73,7 +73,7 @@
     background: transparent;
 }
 
-input {
+.search input {
     width: 100%;
     height: 100%;
     color: black;
@@ -83,7 +83,7 @@ input {
     background: transparent;
 }
 
-i {
+.search i {
     font-size: 22px;
     color: black;
     cursor: pointer;
@@ -104,11 +104,15 @@ i {
     padding: 2rem;
     margin: 1.5rem;
     border-radius: 20px;
-    width: 300px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
+
 .afiliados-content:hover {
     transform: translateY(-10px) scale(1.03);
     box-shadow: 0 10px 25px rgba(255, 115, 0, 0.3);
@@ -116,19 +120,17 @@ i {
 
 .afiliados-content h3 {
     color: white;
-    font-size: 30px;
+    font-size: 1.875rem;
 }
-.img-content img{
-     width: 160px;
+
+.afiliados-content .img-content img {
+    width: 160px;
     height: 160px;
     border-radius: 50%;
     border: 4px solid #ff7300;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     object-fit: cover;
 }
-
-
-
 
 .afiliados-content:hover .img-content img {
     transform: scale(1.1) rotate(3deg);
@@ -153,16 +155,25 @@ i {
 }
 
 .comida-content {
-    width: 40%;
-    height: 34.375rem;
+    width: 45%;
+    min-width: 350px;
+    max-width: 500px;
+    height: auto;
+    min-height: 34.375rem;
     display: flex;
     flex-direction: row;
     background: #151212;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 1rem auto;
+    margin: 1rem;
     border-radius: 30px;
     padding: 15px 0px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.comida-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 145, 0, 0.3);
 }
 
 .comida-content button {
@@ -249,23 +260,55 @@ i {
     color: #fff;
 }
 
+.comida-descripcion {
+    margin: 1.25rem 2.5rem;
+}
+
+.precio-container {
+    text-align: justify;
+    padding: 0 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.precio-descuento {
+    color: #4caf50;
+    font-weight: 600;
+    font-size: 1.125rem;
+}
+
+.precio-original {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.precio-normal {
+    font-weight: 600;
+    font-size: 1.125rem;
+}
+
+.btn-add-cart {
+    margin-left: 5px;
+    padding: 10px 14px !important;
+    background-color: #198754;
+    color: white;
+    text-decoration: none;
+    border-radius: 38px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-add-cart:hover {
+    background-color: #157347;
+    transform: scale(1.05);
+}
+
 .afiliados-container {
     padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.afiliados-content {
-    text-align: justify;
-    margin: 15px 25px;
-    padding: 15px 50px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border-radius: 15px;
-    background: #151212;
 }
 
 .Negocio-content {
@@ -299,3 +342,133 @@ i {
   .main > div.comida-container {
     grid-area: comida-container;
   }
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .main {
+        grid-template-areas:
+            "content-header"
+            "comida-container"
+            "afiliados-container";
+        grid-template-columns: 1fr;
+    }
+
+    .comida-content {
+        width: 90%;
+        max-width: 600px;
+    }
+}
+
+@media (max-width: 768px) {
+    .content h1 {
+        font-size: 2rem;
+        width: 80%;
+    }
+
+    .content h3 {
+        font-size: 1.25rem;
+    }
+
+    .content-text {
+        padding: 40px 20px;
+        font-size: 1.5rem;
+    }
+
+    .search-content {
+        justify-content: center;
+        margin: 15px 20px;
+    }
+
+    .search:hover {
+        width: 350px;
+    }
+
+    .afiliados-container h2,
+    .comida-container h2 {
+        font-size: 2rem;
+    }
+
+    .afiliados-content {
+        flex-direction: column;
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .comida-content {
+        width: 95%;
+        min-width: 300px;
+        min-height: 30rem;
+    }
+
+    .comida-content .img-content {
+        width: 90%;
+    }
+
+    .comida-content .img-content img {
+        height: 200px;
+    }
+
+    .btn-content a {
+        padding: 12px 40px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content h1 {
+        font-size: 1.5rem;
+        width: 90%;
+    }
+
+    .content h3 {
+        font-size: 1rem;
+    }
+
+    .search:hover {
+        width: 250px;
+    }
+
+    .search input {
+        font-size: 16px;
+    }
+
+    .afiliados-container h2,
+    .comida-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .afiliados-content h3 {
+        font-size: 1.25rem;
+    }
+
+    .afiliados-content .img-content img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .comida-content {
+        min-width: 250px;
+        padding: 10px;
+    }
+
+    .comida-content .img-content {
+        width: 95%;
+    }
+
+    .comida-content .img-content img {
+        height: 150px;
+    }
+
+    .text-content p {
+        font-size: 0.875rem;
+    }
+
+    .title h3 {
+        font-size: 1.5rem;
+    }
+
+    .btn-content a {
+        padding: 10px 30px;
+        font-size: 16px;
+    }
+}

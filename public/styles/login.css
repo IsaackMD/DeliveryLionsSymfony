@@ -84,6 +84,15 @@
     background-color: #1e1e1e;
 }
 
+.btn-back-content {
+    margin: 5px 2px;
+    text-align: start;
+}
+
+.img-login-container {
+    text-align: end;
+}
+
 .titulo-con-lineas {
     color: white;
     font-size: 2.5rem;

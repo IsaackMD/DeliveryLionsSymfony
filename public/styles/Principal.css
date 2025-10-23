@@ -1,17 +1,17 @@
-@view-transition{
+/* View Transitions API */
+@view-transition {
     navigation: auto;
-
 }
 
-::view-transition-group(*){
+::view-transition-group(*) {
     animation-duration: 0.5s;
 }
 
-::view-transition-old(root){
+::view-transition-old(root) {
     animation: slide-out-to-left 0.5s forwards;
 }
 
-::view-transition-new(root){
+::view-transition-new(root) {
     animation: slide-in-from-right 0.5s forwards;
 }
 
@@ -31,35 +31,54 @@
     to {
         transform: translateX(0);
     }
-
 }
 
-*{
+/* Base Styles */
+* {
     font-family: "Poppins", sans-serif;
-    padding: 0;
-    margin: 0;
+    box-sizing: border-box;
 }
 
-body{
+body {
     background-color: #292828 !important;
     font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
 }
-h1, h2, h3 {
+
+h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     letter-spacing: 1px;
+    margin: 0;
 }
 
 p, span, a, input, label {
     font-weight: 400;
 }
 
-
+/* Utility Classes */
 .back_btn {
-    background: #ff2929;
-    background: linear-gradient(90deg,rgba(255, 41, 41, 1) 50%, rgba(252, 69, 109, 1) 100%);
-    padding: 5px 15px;
+    background: linear-gradient(90deg, rgba(255, 41, 41, 1) 50%, rgba(252, 69, 109, 1) 100%);
+    padding: 10px 20px;
     margin: 5px;
-    border-radius: 5px;
+    border-radius: 8px;
     color: white;
     text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+}
+
+.back_btn:hover {
+    background: linear-gradient(90deg, rgba(255, 41, 41, 1) 30%, rgba(252, 69, 109, 1) 80%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 41, 41, 0.3);
+    color: white;
+}
+
+.back_btn i {
+    margin-right: 5px;
 }

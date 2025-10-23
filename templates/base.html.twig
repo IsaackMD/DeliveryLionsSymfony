@@ -14,27 +14,16 @@
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1.7.8/glider.min.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
             <link rel="stylesheet" href="{{ asset('styles/Principal.css') }}">
-       {% block stylesheets %}     
-            <style>
-                .back_btn{
-                    background:rgb(146, 0, 0) !important;
-                    padding: 5px 15px;
-                    margin: 5px;
-                    border-radius: 5px;
-                    color: white;
-                    text-decoration: none;
-                }
-            </style>
-        {% endblock %}
+       {% block stylesheets %}{% endblock %}
 
     </head>
-    <header class="header">
-        {% include 'components/nav.html.twig' %}
-    </header>
     <body>
+        <header class="header">
+            {% include 'components/nav.html.twig' %}
+        </header>
         {% block body %}{% endblock %}
+        {% include 'components/footer.html.twig' %}
     </body>
-    {% include 'components/footer.html.twig' %}
     
     {% block javascripts %}
         <script src="https://kit.fontawesome.com/907d8454bc.js" crossorigin="anonymous"></script>

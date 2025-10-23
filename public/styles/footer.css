@@ -1,7 +1,52 @@
-.footer-container{
+/* Footer Styles */
+.footer-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ff9a56;
-    color: rgb(0, 0, 0);
+    background: linear-gradient(90deg, #ff7300 0%, #ff9a56 50%, #ff7300 100%);
+    color: #000;
+    padding: 2rem 1rem;
+    margin-top: 3rem;
+    box-shadow: 0 -4px 15px rgba(255, 115, 0, 0.2);
+    text-align: center;
+    font-weight: 500;
+}
+
+.footer-container p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.footer-container a {
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.footer-container a:hover {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    .footer-container {
+        padding: 1.5rem 1rem;
+        font-size: 0.875rem;
+    }
+
+    .footer-container p {
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-container {
+        padding: 1rem 0.5rem;
+    }
+
+    .footer-container p {
+        font-size: 0.75rem;
+    }
 }

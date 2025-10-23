@@ -1,22 +1,174 @@
-.row_detalleC{
+/* Detalle de Compra Styles */
+.detalle-compra-container {
+    margin: 7.5rem auto;
+}
+
+.detalle-compra-main {
+    background-color: white;
+}
+
+.img-pedido {
+    max-width: 100px;
+}
+
+.divider-line {
+    height: 1px;
+}
+
+.divider-line .progress-bar {
+    width: 100%;
+    background: #dee2e6;
+}
+
+.total-price {
+    color: #198754;
+    font-weight: 700;
+}
+
+.paypal-container {
+    text-align: center;
+}
+
+.row_detalleC {
     background: white;
     margin-top: 30px;
-    border-radius: 8px;
-    padding: 20px;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
-.detalleTotal{
-    box-shadow: -7px -5px 10px -5px rgba(0, 0, 0, 0.5);
+
+.row_detalleC:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.row_detalleC h1 {
+    color: #292828;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #ff7300;
+}
+
+.row_detalleC table {
+    margin-top: 1rem;
+}
+
+.row_detalleC thead {
+    background: linear-gradient(90deg, #ff7300 0%, #ffac39 100%);
+    color: white;
+}
+
+.row_detalleC thead th {
+    padding: 15px !important;
+    font-weight: 600;
+}
+
+.row_detalleC tbody td {
+    padding: 15px !important;
+    vertical-align: middle;
+}
+
+.detalleTotal {
+    box-shadow: -7px -5px 10px -5px rgba(0, 0, 0, 0.15);
     text-align: center;
-    padding: 8px;
+    padding: 20px;
     min-height: 400px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 15px;
 }
-.detp{
-    margin-bottom: 0rem !important;
-    font-size: medium;
-    font-weight: 400;
+
+.detalleTotal h4 {
+    color: #292828;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
 }
-.detaCompra{
+
+.detp {
+    margin-bottom: 0.5rem !important;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #495057;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
+.detaCompra {
     min-height: 310px;
-    padding: 15px 15px 0;
-    text-align: justify;
+    padding: 20px 15px 0;
+    text-align: left;
+}
+
+#paypal-button-container {
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .row_detalleC {
+        padding: 20px;
+    }
+
+    .detalleTotal {
+        margin-top: 20px;
+        min-height: auto;
+    }
+
+    .detaCompra {
+        min-height: auto;
+        padding: 15px 10px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .row_detalleC {
+        padding: 15px;
+    }
+
+    .row_detalleC h1 {
+        font-size: 1.5rem;
+    }
+
+    .row_detalleC thead th,
+    .row_detalleC tbody td {
+        padding: 10px !important;
+        font-size: 0.875rem;
+    }
+
+    .detalleTotal h4 {
+        font-size: 1.25rem;
+    }
+
+    .detp {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .row_detalleC {
+        padding: 10px;
+    }
+
+    .row_detalleC h1 {
+        font-size: 1.25rem;
+    }
+
+    .row_detalleC table {
+        font-size: 0.75rem;
+    }
+
+    .row_detalleC thead th,
+    .row_detalleC tbody td {
+        padding: 8px !important;
+    }
+
+    .img-thumbnail {
+        max-width: 60px !important;
+    }
+
+    .detp {
+        font-size: 0.875rem;
+    }
 }

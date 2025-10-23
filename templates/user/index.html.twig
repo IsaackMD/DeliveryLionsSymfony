@@ -122,28 +122,26 @@
                             <h3>{{ comida.NomMenu}}</h3>
                         </div>
                         <div class="text-content">
-                            <p style="margin: 1.25rem 2.5rem;">{{comida.Descrip}}</p>
+                            <p class="comida-descripcion">{{comida.Descrip}}</p>
                         </div>
-                        <div class="text-content" 
-                            style="text-align: justify; padding: 0 4rem; display: flex; align-items: center; justify-content: space-evenly;">
+                        <div class="text-content precio-container">
                             {% if (comida.descuento > 0) %}
-                            <p style="">
+                            <p class="precio-descuento">
                                 ${{ comida.precio - (comida.precio * (0.01 * comida.descuento)) }} MXN
                             </p>
-                            <p style="text-decoration: line-through;">${{comida.precio}}MXN</p>
+                            <p class="precio-original">${{comida.precio}}MXN</p>
                             {% else %}
-                            <p style="">${{comida.precio}}MXN</p>
+                            <p class="precio-normal">${{comida.precio}}MXN</p>
                             {% endif %}
                         </div>
                         <div class="btn-content">
-                            <a data-bs-toggle="modal" role="button" 
+                            <a data-bs-toggle="modal" role="button"
                                 data-id="{{ comida.id }}"
                                 onClick="mostrarDetComida(this)"
                             >
                                 Ver
                             </a>
-                            <a role="button" 
-                                style="margin-left:5px; padding: 10px 14px !important; background-color: #198754" 
+                            <a role="button" class="btn-add-cart"
                                 onClick="addCart({{ comida.id }})" >
                                 <i class="fa-solid fa-circle-plus"></i>
                             </a>
