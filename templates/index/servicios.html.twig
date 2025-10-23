@@ -1,61 +1,131 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inicio{% endblock %}
- {% block stylesheets %}
- {# <link rel="stylesheet" href="{{ asset('styles/index.css') }}">  #}
- <link rel="stylesheet" href="{{ asset('styles/servicios.css') }}"> 
- {% endblock %}
+{% block title %}Servicios{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/servicios.css') }}">
+{% endblock %}
 {% block body %}
 
-<main>
-    <section>
-        <div class="content-text" style="margin-top: 2rem;">
-            <h3 style="font-size:40px">Servicios</h3>
+<main class="services-page">
+    <section class="services-hero" id="inicio-servicios">
+        <div class="services-hero__content">
+            <span class="services-pill">Servicios</span>
+            <h1>Movemos tu comida con precisión felina</h1>
+            <p>Delivery Lions combina tecnología, logística inteligente y atención humana para que tus pedidos lleguen siempre puntuales y con el mejor sabor.</p>
+            <div class="services-hero__chips">
+                <span>Pedidos a domicilio</span>
+                <span>Reservas planificadas</span>
+                <span>Notificaciones en vivo</span>
+            </div>
         </div>
-        <div class="serviciosContexto">
-            <div id="pedidoDomicilio">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-pin" width="200" height="200" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ff9300" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
-                    <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
-                </svg>
-                <br>
-                <h3><span>Pedido a domicilio</span></h3>
-            </div>
-            <div>
-                <p class="p-servicios">Disfruta de la conveniencia de recibir tus platillos favoritos directamente en tu puerta con nuestro servicio de Pedido a Domicilio en Delivery Lions. Explora la variedad de restaurantes, selecciona tus platillos preferidos y realiza tu pedido en solo unos clics. Además, facilitamos el contacto directo con el negocio para ajustar detalles específicos de tu pedido, garantizando una experiencia personalizada y satisfactoria.</p>
-            </div>
-            <div id="envioExpress">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-truck" width="200" height="200" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ff9300" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                    <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                    <path d="M5 17h-2v-11a1 1 0 0 1 1 -1h9v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" />
-                </svg>
-                <br>
-                <h3><span>Envios Express</span></h3>
-            </div>
-            <div>
-                <p class="p-servicios">En Delivery Lions, comprendemos que la velocidad es esencial para satisfacer tus antojos. Con nuestro servicio de Envíos Express, los pedidos son gestionados directamente por el negocio, asegurando la frescura y rapidez en cada entrega. Además, mantenemos la posibilidad de contactar directamente con el establecimiento para cualquier solicitud especial o modificación en tu pedido. Experimenta la eficiencia y la calidad con Envíos Express.</p>
-            </div>
-            <div id="reservaPedido">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-cube-send" width="200" height="200" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ff9300" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M16 12.5l-5 -3l5 -3l5 3v5.5l-5 3z" />
-                    <path d="M11 9.5v5.5l5 3" />
-                    <path d="M16 12.545l5 -3.03" />
-                    <path d="M7 9h-5" />
-                    <path d="M7 12h-3" />
-                    <path d="M7 15h-1" />
-                </svg>
-                <br>
-                <h3><span>Reserva de pedido</span></h3>
-            </div>
-            <div>
-                <p class="p-servicios">En Delivery Lions, valoramos la comunicación directa contigo y con los negocios locales. Ofrecemos la opción de contactar directamente con el establecimiento elegido para ajustar detalles específicos de tu pedido. Ya sea para personalizar tu plato, agregar instrucciones especiales o hacer cambios de última hora, la comunicación directa te brinda la flexibilidad necesaria para garantizar que tu pedido sea exactamente como lo deseas. Estamos aquí para facilitar una experiencia culinaria a tu medida. ¡Conéctate directamente con el negocio y disfruta de tus platillos preferidos de la manera que más te guste!</p>
+        <div class="services-hero__media">
+            <div class="services-hero__card">
+                <h2>Experiencia integral</h2>
+                <p>Disfruta de paneles intuitivos, seguimiento minuto a minuto y soporte permanente para resolver cualquier duda en segundos.</p>
+                <ul>
+                    <li>Panel de pedidos en tiempo real</li>
+                    <li>Comunicación directa con el comercio</li>
+                    <li>Alertas inteligentes para cada etapa</li>
+                </ul>
             </div>
         </div>
     </section>
+
+    <section class="services-section" id="servicios-detalle">
+        <div class="services-section__header">
+            <h2>Nuestros pilares</h2>
+            <p>Elige la modalidad que mejor se adapte a tu ritmo. Nosotros nos encargamos de que llegue perfecta.</p>
+        </div>
+        <div class="services-grid">
+            <article class="service-card">
+                <div class="service-card__icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                        <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
+                    </svg>
+                </div>
+                <h3>Pedido a domicilio</h3>
+                <p>Recibe tus platillos favoritos sin salir de casa. Elige, confirma y nosotros coordinamos la entrega con tus restaurantes predilectos.</p>
+                <ul>
+                    <li>Mapas dinámicos con ubicación del repartidor</li>
+                    <li>Actualizaciones en vivo por correo y móvil</li>
+                    <li>Posibilidad de personalizar instrucciones</li>
+                </ul>
+            </article>
+            <article class="service-card">
+                <div class="service-card__icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                        <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                        <path d="M5 17h-2v-11a1 1 0 0 1 1 -1h9v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" />
+                    </svg>
+                </div>
+                <h3>Envíos express</h3>
+                <p>Cuando la velocidad importa, nuestros aliados cocinan y entregan al instante con rutas optimizadas y confirmaciones automáticas.</p>
+                <ul>
+                    <li>Despachos prioritarios con monitoreo constante</li>
+                    <li>Notificaciones push en cada hito</li>
+                    <li>Soporte inmediato en caso de cambios</li>
+                </ul>
+            </article>
+            <article class="service-card">
+                <div class="service-card__icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 12.5l-5 -3l5 -3l5 3v5.5l-5 3z" />
+                        <path d="M11 9.5v5.5l5 3" />
+                        <path d="M16 12.545l5 -3.03" />
+                        <path d="M7 9h-5" />
+                        <path d="M7 12h-3" />
+                        <path d="M7 15h-1" />
+                    </svg>
+                </div>
+                <h3>Reserva de pedidos</h3>
+                <p>Programa tus antojos con antelación, define horarios y especificaciones y deja que Delivery Lions coordine cada detalle.</p>
+                <ul>
+                    <li>Confirmaciones automáticas para clientes y comercios</li>
+                    <li>Gestión flexible de horarios y cambios</li>
+                    <li>Historial para repetir pedidos con un clic</li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <section class="services-section services-section--secondary">
+        <div class="services-section__header">
+            <h2>¿Cómo funciona?</h2>
+            <p>Integramos cada etapa del proceso para que solo te preocupes por disfrutar.</p>
+        </div>
+        <div class="services-timeline">
+            <div class="services-step">
+                <span class="services-step__number">1</span>
+                <h3>Elige tu servicio</h3>
+                <p>Selecciona el restaurante, define tu pedido y agrega notas especiales para el chef o el repartidor.</p>
+            </div>
+            <div class="services-step">
+                <span class="services-step__number">2</span>
+                <h3>Seguimiento inteligente</h3>
+                <p>Recibe actualizaciones automáticas en tu panel, por correo o móvil mientras preparamos y entregamos tu orden.</p>
+            </div>
+            <div class="services-step">
+                <span class="services-step__number">3</span>
+                <h3>Entrega con feedback</h3>
+                <p>Califica la experiencia, guarda tus favoritos y programa tu próxima visita con un solo toque.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-cta" id="servicios">
+        <div class="services-cta__content">
+            <h2>Listo para disfrutar al estilo Delivery Lions?</h2>
+            <p>Crea tu cuenta o inicia sesión para empezar a pedir, reservar y seguir tus entregas sin complicaciones.</p>
+        </div>
+        <div class="services-cta__actions">
+            <a class="services-button" href="{{ path('app_register') }}">Crear cuenta</a>
+            <a class="services-button services-button--ghost" href="{{ path('app_login') }}">Iniciar sesión</a>
+        </div>
+    </section>
 </main>
-    <script src="https://cdn.jsdelivr.net/npm/glider-js@1.7.8/glider.min.js"></script>
 {% endblock %}

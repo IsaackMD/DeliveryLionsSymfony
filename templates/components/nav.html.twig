@@ -11,7 +11,7 @@
 
     {% if 'ROLE_ADMIN' in app.user.roles %}
         {% set navLinks = [
-            {'label': 'Inicio', 'url': '#inicio'},
+            {'label': 'Inicio', 'url': path('app_index') ~ '#inicio'},
             {'label': 'Afiliado', 'url': '#'},
             {'label': 'Clientes', 'url': '#'},
             {'label': 'Cerrar Sesión', 'url': path('app_logout'), 'class': 'nav-link--accent'}
@@ -38,7 +38,7 @@
         ] %}
     {% elseif 'ROLE_AFI' in app.user.roles %}
         {% set navLinks = [
-            {'label': 'Inicio', 'url': '#'},
+            {'label': 'Inicio', 'url': path('app_index') ~ '#inicio'},
             {'label': 'Pedidos', 'url': '#'},
             {'label': 'Menú', 'url': '#'},
             {'label': 'Perfil', 'url': '#'},

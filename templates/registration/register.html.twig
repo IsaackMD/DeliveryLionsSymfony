@@ -3,61 +3,72 @@
 {% block title %}Register De Residente{% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{{ asset('styles/Pags_Principal.css') }}">
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/login.css') }}">
 {% endblock %}
 
 {% block body %}
-    <div class="btn-back-content" style="margin: 1rem 0; ">
-        <a class="back_btn" href="javascript:history.go(-1);" type="button">
-            <i class="fa-solid fa-chevron-left"></i> Regresar
-        </a>
-    </div>
-    <div class="formularioRegistro">
-        <h1>Register De Residente</h1>
-        <div>
-            <i class="fa-solid fa-circle-user " style="font-size: 10em; color:rgb(68, 68, 68);"></i>
-        </div>
-        {% if error %}
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
-                    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                </svg>
-                <strong>Error: </strong> {{ error }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <section class="auth-shell">
+        <div class="auth-card">
+            <div class="auth-card__illustration">
+                <span class="auth-badge">Únete a Delivery Lions</span>
+                <h1 class="auth-card__title">Crea tu cuenta y potencia tu experiencia gastronómica</h1>
+                <p class="auth-card__subtitle">Con tu perfil personalizado podrás reservar pedidos, guardar negocios favoritos y recibir promociones exclusivas.</p>
+                <ul class="auth-list">
+                    <li>Perfil con foto para una atención más cercana</li>
+                    <li>Notificaciones y seguimiento en vivo</li>
+                    <li>Acceso rápido desde cualquier dispositivo</li>
+                </ul>
+                <figure class="auth-figure">
+                    <img src="{{ asset('imgs/imgsIndex/img1.png') }}" alt="Nuevo usuario registrándose">
+                    <figcaption>Regístrate y descubre todo lo que Delivery Lions tiene para ti.</figcaption>
+                </figure>
             </div>
-        {% endif %}
-        {{ form_errors(registrationForm) }}
+            <div class="auth-card__form">
+                <a class="auth-back" href="javascript:history.back()">
+                    <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                    <span>Regresar</span>
+                </a>
+                <div class="auth-card__header">
+                    <h2>Completa tus datos</h2>
+                    <p>Cuéntanos un poco sobre ti para personalizar tus pedidos y recomendaciones.</p>
+                </div>
 
-        {{ form_start(registrationForm, {'attr' : { 'class' : 'formularioCuerpo' , 'enctype': 'multipart/form-data'}}) }}
+                {% if error %}
+                    <div class="auth-alert auth-alert--error">{{ error }}</div>
+                {% endif %}
 
-        <div class="columnasFormulario">
-            {{ form_row(registrationForm.nombre) }}
-            {{ form_row(registrationForm.ApellidoP) }}
-        </div>
-        <div class="columnasFormulario">
-            {{ form_row(registrationForm.ApellidoM) }}
-            {{ form_row(registrationForm.username)}}
-        </div>
-        <div class="columnasFormulario">
-            {{ form_row(registrationForm.email) }}
-            {{ form_row(registrationForm.plainPassword)}}
-        </div>
-        <div class="columnasFormulario">
-            {{ form_row(registrationForm.Sexo)}}
-            {{ form_row(registrationForm.Telefono) }}
-        </div>
-        <div class="columnasFormulario">
-            {{ form_row(registrationForm.Fecha_Na)}}
-            <div class="columnasFormulario"style="margin: 5px 0; display: block; padding-top:0.5rem; width: 100%;">
-                <p>Imagen</p>
-                <input class="form-control" name="fotito" id="fotito" type="file"  accept=".jpg" required/>
+                {% set formErrors = form_errors(registrationForm) %}
+                {% if formErrors is not empty %}
+                    <div class="auth-alert auth-alert--error auth-alert--list">{{ formErrors|raw }}</div>
+                {% endif %}
+
+                {{ form_start(registrationForm, {'attr' : { 'class' : 'auth-form auth-form--grid', 'enctype': 'multipart/form-data'}}) }}
+                    <div class="auth-grid">
+                        {{ form_row(registrationForm.nombre, {'row_attr': {'class': 'auth-field'}, 'attr': {'class': 'auth-input'}}) }}
+                        {{ form_row(registrationForm.ApellidoP, {'row_attr': {'class': 'auth-field'}, 'attr': {'class': 'auth-input'}}) }}
+                        {{ form_row(registrationForm.ApellidoM, {'row_attr': {'class': 'auth-field'}, 'attr': {'class': 'auth-input'}}) }}
+                        {{ form_row(registrationForm.username, {'row_attr': {'class': 'auth-field'}, 'attr': {'class': 'auth-input'}}) }}
+                        {{ form_row(registrationForm.email, {'row_attr': {'class': 'auth-field'}, 'attr': {'class': 'auth-input'}}) }}
+                        {{ form_row(registrationForm.plainPassword, {'row_attr': {'class': 'auth-field'}, 'attr': {'class': 'auth-input'}}) }}
+                        {{ form_row(registrationForm.Sexo, {'row_attr': {'class': 'auth-field'}, 'attr': {'class': 'auth-input'}}) }}
+                        {{ form_row(registrationForm.Telefono, {'row_attr': {'class': 'auth-field'}, 'attr': {'class': 'auth-input'}}) }}
+                        {{ form_row(registrationForm.Fecha_Na, {'row_attr': {'class': 'auth-field auth-field--full'}, 'attr': {'class': 'auth-input'}}) }}
+                        <div class="auth-field auth-field--full auth-field--file">
+                            <label for="fotito">Fotografía de perfil (JPG)</label>
+                            <input class="auth-input" name="fotito" id="fotito" type="file" accept=".jpg" required>
+                            <span class="auth-hint">Elige una imagen cuadrada menor a 2&nbsp;MB para una mejor visualización.</span>
+                        </div>
+                    </div>
+                    <div class="auth-checkbox">
+                        {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'auth-checkbox__input'}}) }}
+                        {{ form_label(registrationForm.agreeTerms, null, {'label_attr': {'class': 'auth-checkbox__label'}}) }}
+                        {{ form_errors(registrationForm.agreeTerms) }}
+                    </div>
+                    <button type="submit" class="auth-submit">Crear mi cuenta</button>
+                {{ form_end(registrationForm) }}
             </div>
         </div>
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn btn-success">Register</button>
-        {{ form_end(registrationForm) }}
-    </div>
-
+    </section>
 {% endblock %}
 

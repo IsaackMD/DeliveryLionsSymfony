@@ -190,30 +190,58 @@
             const animatedBlocks = document.querySelectorAll('[data-animate]');
             const childBlocks = document.querySelectorAll('[data-animate-child]');
 
-            const observer = new IntersectionObserver((entries, obs) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        obs.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.2
-            });
-
-            animatedBlocks.forEach((element) => {
-                const delay = element.dataset.animateDelay;
-                if (delay) {
-                    element.style.setProperty('--animate-delay', `${delay}ms`);
+            const revealHashTarget = () => {
+                const { hash } = window.location;
+                if (!hash) {
+                    return;
                 }
-                observer.observe(element);
-            });
 
-            childBlocks.forEach((element, index) => {
-                element.classList.add('animate-child');
-                element.style.setProperty('--animate-delay', `${(index + 1) * 90}ms`);
-                observer.observe(element);
-            });
+                const target = document.querySelector(hash);
+                if (!target) {
+                    return;
+                }
+
+                target.classList.add('is-visible');
+                target.querySelectorAll('[data-animate-child]').forEach((element) => {
+                    element.classList.add('is-visible');
+                });
+            };
+
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries, obs) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.2
+                });
+
+                animatedBlocks.forEach((element) => {
+                    const delay = element.dataset.animateDelay;
+                    if (delay) {
+                        element.style.setProperty('--animate-delay', `${delay}ms`);
+                    }
+                    observer.observe(element);
+                });
+
+                childBlocks.forEach((element, index) => {
+                    element.classList.add('animate-child');
+                    element.style.setProperty('--animate-delay', `${(index + 1) * 90}ms`);
+                    observer.observe(element);
+                });
+            } else {
+                animatedBlocks.forEach((element) => element.classList.add('is-visible'));
+                childBlocks.forEach((element, index) => {
+                    element.classList.add('animate-child', 'is-visible');
+                    element.style.setProperty('--animate-delay', `${(index + 1) * 90}ms`);
+                });
+            }
+
+            revealHashTarget();
+            window.addEventListener('hashchange', revealHashTarget);
         });
     </script>
 {% endblock %}

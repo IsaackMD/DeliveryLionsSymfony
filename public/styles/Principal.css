@@ -148,6 +148,10 @@ body {
     margin-top: clamp(3rem, 6vw, 6rem);
 }
 
+.site-main > section {
+    scroll-margin-top: clamp(120px, 18vh, 160px);
+}
+
 .site-main h1,
 .site-main h2,
 .site-main h3,
