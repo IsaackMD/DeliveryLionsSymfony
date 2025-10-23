@@ -194,8 +194,10 @@
                 0 0 0 1px rgba(255, 255, 255, 0.1);
     text-align: center;
     margin: auto;
-    animation: fadeInUp 0.8s ease;
+    animation: fadeInUp 0.8s ease forwards;
+    animation-fill-mode: forwards;
     overflow: hidden;
+    z-index: 2;
 }
 
 .formularioRegistro::before {
@@ -212,18 +214,23 @@
         transparent
     );
     animation: shimmer 3s infinite;
+    pointer-events: none;
+    z-index: 1;
 }
 
 /* Header del Formulario */
 .register-header {
     margin-bottom: 2rem;
-    animation: fadeInUp 1s ease;
+    animation: fadeInUp 1s ease forwards;
+    position: relative;
+    z-index: 2;
 }
 
 .icon-wrapper {
     position: relative;
     display: inline-block;
     margin-bottom: 1rem;
+    pointer-events: none;
 }
 
 .user-icon {
@@ -235,6 +242,7 @@
     background-clip: text;
     animation: gradientShift 3s ease infinite, iconBounce 2s ease-in-out infinite;
     filter: drop-shadow(0 5px 15px rgba(255, 115, 0, 0.4));
+    pointer-events: none;
 }
 
 .icon-pulse {
@@ -247,6 +255,7 @@
     background: radial-gradient(circle, rgba(255, 115, 0, 0.6), transparent);
     transform: translate(-50%, -50%);
     animation: pulse 2s infinite;
+    pointer-events: none;
 }
 
 .register-title {
@@ -257,14 +266,16 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin: 0.5rem 0;
-    animation: fadeInUp 1.2s ease;
+    animation: fadeInUp 1.2s ease forwards;
+    pointer-events: none;
 }
 
 .register-subtitle {
     font-size: 1.125rem;
     color: #666;
     margin: 0;
-    animation: fadeInUp 1.4s ease;
+    animation: fadeInUp 1.4s ease forwards;
+    pointer-events: none;
 }
 
 /* Alert Personalizada */
@@ -272,23 +283,31 @@
     border-radius: 15px;
     border: none;
     box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
-    animation: fadeInUp 0.6s ease;
+    animation: fadeInUp 0.6s ease forwards;
+    position: relative;
+    z-index: 2;
 }
 
 /* Sección del Formulario */
 .form-section {
     margin-top: 2rem;
+    position: relative;
+    z-index: 2;
 }
 
 .formularioCuerpo {
     width: 100%;
+    position: relative;
+    z-index: 2;
 }
 
 .form-row {
     display: flex;
     gap: 1.5rem;
     margin-bottom: 1.5rem;
-    animation: fadeInUp 1s ease;
+    animation: fadeInUp 1s ease forwards;
+    position: relative;
+    z-index: 2;
 }
 
 .form-row:nth-child(1) { animation-delay: 0.1s; }
@@ -300,6 +319,8 @@
 .form-group {
     flex: 1;
     text-align: left;
+    position: relative;
+    z-index: 2;
 }
 
 /* Estilos de Inputs */
@@ -310,6 +331,8 @@
     margin-bottom: 0.5rem;
     font-size: 0.95rem;
     transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
 }
 
 .form-group input,
@@ -322,6 +345,9 @@
     transition: all 0.3s ease;
     background: white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 3;
+    cursor: text;
 }
 
 .form-group input:focus,
@@ -331,6 +357,7 @@
     box-shadow: 0 0 0 4px rgba(255, 115, 0, 0.1),
                 0 5px 15px rgba(255, 115, 0, 0.2);
     transform: translateY(-2px);
+    z-index: 4;
 }
 
 .form-group input:hover,
@@ -342,16 +369,21 @@
 /* File Upload Personalizado */
 .file-upload-group {
     position: relative;
+    z-index: 2;
 }
 
 .file-upload-wrapper {
     position: relative;
+    z-index: 2;
 }
 
 .file-input {
     opacity: 0;
     position: absolute;
-    z-index: -1;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
 }
 
 .file-label {
@@ -367,6 +399,9 @@
     transition: all 0.3s ease;
     font-weight: 600;
     box-shadow: 0 5px 15px rgba(255, 115, 0, 0.3);
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
 }
 
 .file-label:hover {
@@ -390,6 +425,8 @@
     justify-content: center;
     align-items: center;
     margin: 2rem 0 1.5rem;
+    position: relative;
+    z-index: 2;
 }
 
 .terms-row input[type="checkbox"] {
@@ -397,18 +434,24 @@
     margin-right: 0.5rem;
     cursor: pointer;
     transform: scale(1.2);
+    position: relative;
+    z-index: 3;
 }
 
 .terms-row label {
     margin: 0;
     cursor: pointer;
     font-size: 0.95rem;
+    position: relative;
+    z-index: 2;
 }
 
 /* Botón de Registro */
 .button-wrapper {
     margin-top: 2rem;
-    animation: fadeInUp 1.8s ease;
+    animation: fadeInUp 1.8s ease forwards;
+    position: relative;
+    z-index: 2;
 }
 
 .btn-register {
@@ -431,6 +474,7 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    z-index: 3;
 }
 
 .btn-register::before {
@@ -586,21 +630,14 @@
 
 /* Animaciones adicionales para campos individuales */
 .form-group:nth-child(1) {
-    animation: slideInFromLeft 0.6s ease;
+    animation: slideInFromLeft 0.6s ease forwards;
 }
 
 .form-group:nth-child(2) {
-    animation: slideInFromRight 0.6s ease;
-}
-
-/* Efecto de brillo en hover para el contenedor */
-.formularioRegistro:hover {
-    box-shadow: 0 25px 70px rgba(255, 115, 0, 0.35),
-                0 0 0 1px rgba(255, 255, 255, 0.2);
-    transform: translateY(-5px);
+    animation: slideInFromRight 0.6s ease forwards;
 }
 
 /* Transición suave para todo el formulario */
 .formularioRegistro {
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
