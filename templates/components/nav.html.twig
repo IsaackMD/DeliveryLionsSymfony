@@ -1,112 +1,134 @@
-<link rel="stylesheet" href="{{ asset('styles/nav.css') }}"> 
-<div class="nav-container">
-    {% if app.user %}
-        {% if 'ROLE_ADMIN' in app.user.roles %}
-            <nav>
-                <ul class="sidebar">
-                    <li class="close" onclick="hideSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
-                    <li class="sections"><a href="#">Inicio</a></li>
-                    <li class="sections"><a href="#">Afiliado</a></li>
-                    <li class="sections"><a href="#">Clientes</a></li>
-                    <li class="sections"><a href="{{path('app_logout')}}">Cerrar Sesión</a></li>
-                </ul>
-                <ul>
-                    <li class="logo"><a href="#"><img src="{{ asset('imgs/logo.jpg') }}" alt=""></a></li>
-                    <li class="sections hideOnMobile"><a href="#">Inicio</a></li>
-                    <li class="sections hideOnMobile"><a href="#">Afiliado</a></li>
-                    <li class="sections hideOnMobile"><a href="#">Clientes</a></li>
-                    <li class="sections hideOnMobile"><a href="{{path('app_logout')}}">Cerrar Sesión</a></li>
-                    <li class="sections menu-button" onclick=showSidebar()><a  href="#" ><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
-                </ul>
-            </nav>
-        {% elseif 'ROLE_USER' in app.user.roles%}
-            {% include 'user/carrito.html.twig' %}
-            <nav>
-                {# <ul >
-                    <li class="close" onclick="hideSidebar()"><a href="{{path('app_user')}}"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
-                    <li class="sections"><a href="{{path('app_user')}}">Inicio</a></li>
-                    <li class="sections"><a href="#">Negocios</a></li>
-                    <li class="sections"><a href="{{path('app_pedido')}}">Pedidos</a></li>
-                    <li class="sections"><a href="#">Perfil</a></li>
-                    <li class="sections"><a href="{{path('app_logout')}}">Cerrar Sesión</a></li>
-                </ul> #}
-                <ul class="sidebar" style="display: flex;">
-                    <li class="logo"><a href="#"><img src="{{ asset('imgs/logo.jpg') }}" alt=""></a></li>
-                    <li class="sections hideOnMobile"><a href="{{path('app_user')}}"><i class="fa-solid fa-house"></i>Inicio</a></li>
-                    <li class="sections hideOnMobile"><a href="#"><i class="fa-solid fa-burger"></i>Negocio</a></li>
-                    <li class="sections hideOnMobile"><a href="{{path('app_pedido')}}"><i class="fa-solid fa-boxes-stacked"></i>Pedidos</a></li>
-                    <li class="sections hideOnMobile"><a href="#"><i class="fa-solid fa-user"></i>Perfil</a></li>
-                    <li class="sections hideOnMobile">
-                        <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                            <i class="fa-solid fa-cart-shopping"></i>Carrito
-                        </a>
-                    </li>
-                    <li class="sections hideOnMobile"><a href="{{path('app_logout')}}"><i class="fa-solid fa-right-from-bracket"></i></a></li>
-                    <li class="sections menu-button" onclick="showSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
-                </ul>
-            </nav>
+<link rel="stylesheet" href="{{ asset('styles/nav.css') }}">
+{% set navLinks = [] %}
+{% set brandRoute = path('app_index') %}
+{% set navRole = 'guest' %}
+{% set showCart = false %}
+{% set navGreeting = null %}
 
-        {% elseif 'ROLE_AFI' in app.user.roles %}
-            <nav>
-                <ul class="sidebar">
-                    <li class="close" onclick="hideSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
-                    <li class="sections"><a href="#">Inicio</a></li>
-                    <li class="sections"><a href="#">Pedidos</a></li>
-                    <li class="sections"><a href="#">Menú</a></li>
-                    <li class="sections"><a href="#">Perfil</a></li>
-                    <li class="sections"><a href="{{path('app_logout')}}">Cerrar Sesión</a></li>
-                </ul>
-                <ul>
-                    <li class="logo"><a href="#"><img src="{{ asset('imgs/logo.jpg') }}" alt=""></a></li>
-                    <li class="sections hideOnMobile"><a href="#">Inicio</a></li>
-                    <li class="sections hideOnMobile"><a href="#">Pedidos</a></li>
-                    <li class="sections hideOnMobile"><a href="#">Menú</a></li>
-                    <li class="sections hideOnMobile"><a href="#">Perfil</a></li>
-                    <li class="sections hideOnMobile"><a href="{{path('app_logout')}}">Cerrar Sesión</a></li>
-                    <li class="sections menu-button" onclick=showSidebar()><a  href="#" ><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
-                </ul>
-            </nav>
-            {% endif %}
-    {% else %}
-            <nav>
-                {# <ul >
-                    <li class="close" onclick="hideSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
-                    <li class="sections"><a href="{{path('app_index')}}">Inicio</a></li>
-                    <li class="sections"><a href="{{path('app_index')}}#nosotros">Nosotros</a></li>
-                    <li class="sections"><a href="{{path('app_index')}}#servicios">Servicios</a></li>
-                    <li class="sections"><a href="#">Contacto</a></li>
-                    <li class="sections"><a href="{{path('app_register')}}">Registrar</a></li>
-                    <li class="sections"><a href="{{path('app_login')}}">Inicio de Sesión</a></li>
-                </ul> #}
-                <ul class="sidebar">
-                    <li class="logo"><a href="#"><img src="{{ asset('imgs/logo.jpg') }}" alt=""></a></li>
-                    <li class="sections hideOnMobile"><a href="{{path('app_index')}}">Inicio</a></li>
-                    <li class="sections hideOnMobile"><a href="{{path('app_index')}}#nosotros">Nosotros</a></li>
-                    <li class="sections hideOnMobile"><a href="{{path('app_index')}}#servicios">Servicios</a></li>
-                    <li class="sections hideOnMobile"><a href="#">Contacto</a></li>
-                    <li class="sections hideOnMobile"><a href="{{path('app_register')}}">Registrar</a></li>
-                    <li class="sections hideOnMobile"><a href="{{path('app_login')}}">Inicio de Sesión</a></li>
-                    <li class="sections menu-button" onclick=showSidebar()><a  href="#" ><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
-                </ul>
-            </nav>
+{% if app.user %}
+    {% set navRole = app.user.roles is iterable ? app.user.roles|join(' ') : 'user' %}
+    {% set navGreeting = app.user.userIdentifier ?? (attribute(app.user, 'username') ?? 'Usuario') %}
+
+    {% if 'ROLE_ADMIN' in app.user.roles %}
+        {% set navLinks = [
+            {'label': 'Inicio', 'url': '#inicio'},
+            {'label': 'Afiliado', 'url': '#'},
+            {'label': 'Clientes', 'url': '#'},
+            {'label': 'Cerrar Sesión', 'url': path('app_logout'), 'class': 'nav-link--accent'}
+        ] %}
+    {% elseif 'ROLE_USER' in app.user.roles %}
+        {% set showCart = true %}
+        {% set brandRoute = path('app_user') %}
+        {% set navLinks = [
+            {'label': 'Inicio', 'url': path('app_user'), 'icon': 'fa-solid fa-house'},
+            {'label': 'Negocios', 'url': '#', 'icon': 'fa-solid fa-burger'},
+            {'label': 'Pedidos', 'url': path('app_pedido'), 'icon': 'fa-solid fa-boxes-stacked'},
+            {'label': 'Perfil', 'url': '#', 'icon': 'fa-solid fa-user'},
+            {
+                'label': 'Carrito',
+                'url': '#offcanvasExample',
+                'icon': 'fa-solid fa-cart-shopping',
+                'attrs': {
+                    'data-bs-toggle': 'offcanvas',
+                    'role': 'button',
+                    'aria-controls': 'offcanvasExample'
+                }
+            },
+            {'label': 'Cerrar Sesión', 'url': path('app_logout'), 'icon': 'fa-solid fa-right-from-bracket', 'class': 'nav-link--accent'}
+        ] %}
+    {% elseif 'ROLE_AFI' in app.user.roles %}
+        {% set navLinks = [
+            {'label': 'Inicio', 'url': '#'},
+            {'label': 'Pedidos', 'url': '#'},
+            {'label': 'Menú', 'url': '#'},
+            {'label': 'Perfil', 'url': '#'},
+            {'label': 'Cerrar Sesión', 'url': path('app_logout'), 'class': 'nav-link--accent'}
+        ] %}
     {% endif %}
+{% else %}
+    {% set navLinks = [
+        {'label': 'Inicio', 'url': path('app_index') ~ '#inicio'},
+        {'label': 'Nosotros', 'url': path('app_index') ~ '#nosotros'},
+        {'label': 'Servicios', 'url': path('app_index') ~ '#servicios'},
+        {'label': 'Registrar', 'url': path('app_register'), 'class': 'nav-link--ghost'},
+        {'label': 'Inicio de Sesión', 'url': path('app_login'), 'class': 'nav-link--accent'}
+    ] %}
+{% endif %}
+
+<div class="nav-wrapper">
+    {% if showCart %}
+        {% include 'user/carrito.html.twig' %}
+    {% endif %}
+    <nav class="nav-surface" data-role="{{ navRole }}">
+        <div class="nav-inner">
+            <a class="nav-logo" href="{{ brandRoute }}">
+                <span class="nav-logo__image">
+                    <img src="{{ asset('imgs/logo.jpg') }}" alt="Delivery Lions" loading="lazy">
+                </span>
+                <span class="nav-logo__text">
+                    <span class="nav-logo__title">Delivery Lions</span>
+                    <span class="nav-logo__subtitle">Tu comida, sin esperas</span>
+                </span>
+            </a>
+            <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false">
+                <span class="nav-toggle__line"></span>
+                <span class="nav-toggle__line"></span>
+                <span class="nav-toggle__line"></span>
+            </button>
+            <div class="nav-menu" data-menu>
+                <ul class="nav-list">
+                    {% for link in navLinks %}
+                        <li class="nav-item">
+                            <a
+                                href="{{ link.url }}"
+                                class="nav-link{{ link.class is defined ? ' ' ~ link.class : '' }}"
+                                {% if link.attrs is defined %}
+                                    {% for attr, value in link.attrs %}
+                                        {{ attr }}="{{ value }}"
+                                    {% endfor %}
+                                {% endif %}
+                            >
+                                {% if link.icon is defined and link.icon %}
+                                    <i class="{{ link.icon }}" aria-hidden="true"></i>
+                                {% endif %}
+                                <span>{{ link.label }}</span>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% if navGreeting %}
+                    <div class="nav-meta">
+                        <span class="nav-greeting">Hola, {{ navGreeting }}</span>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="nav-overlay" data-overlay></div>
+    </nav>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/glider-js@1.7.8/glider.min.js"></script>
 
 <script>
-    function showSidebar(){
-        const sidebar = document.querySelector('.sidebar');
-        if (sidebar) {
-            sidebar.style.display = 'flex';
+    document.addEventListener('DOMContentLoaded', function () {
+        const nav = document.querySelector('.nav-surface');
+        const toggle = nav ? nav.querySelector('.nav-toggle') : null;
+        const menu = nav ? nav.querySelector('[data-menu]') : null;
+        const overlay = nav ? nav.querySelector('[data-overlay]') : null;
+
+        if (!nav || !toggle || !menu || !overlay) {
+            return;
         }
-    };
-    function hideSidebar() {
-        const sidebar = document.querySelector('.sidebar');
-        if (sidebar) {
-            sidebar.style.display = 'none';
-        }
-    }
 
+        const closeMenu = () => {
+            nav.classList.remove('is-open');
+            toggle.setAttribute('aria-expanded', 'false');
+        };
 
+        toggle.addEventListener('click', () => {
+            const isOpen = nav.classList.toggle('is-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
 
-    </script>
+        overlay.addEventListener('click', closeMenu);
+        menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+    });
+</script>

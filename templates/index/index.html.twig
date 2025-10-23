@@ -1,164 +1,219 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Inicio{% endblock %}
- {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('styles/index.css') }}"> 
- {% endblock %}
-{% block body %}
 
-    <section id="inicio" class="content"> 
-        <div class="content-text">
-            <h1>BIENVENIDO DELIVERY LIONS</h1>
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/index.css') }}">
+{% endblock %}
+
+{% block body %}
+<section id="inicio" class="hero" data-animate="fade-up">
+    <div class="hero__background" aria-hidden="true">
+        <span class="hero__orb hero__orb--one"></span>
+        <span class="hero__orb hero__orb--two"></span>
+        <span class="hero__orb hero__orb--three"></span>
+    </div>
+    <div class="hero__content">
+        <span class="badge-pill" data-animate-child>Bienvenido a Delivery Lions</span>
+        <h1 class="hero__title" data-animate-child>Entregamos tus antojos con energía felina.</h1>
+        <p class="hero__subtitle" data-animate-child>Conecta con los mejores sabores de Asturias y recibe tus pedidos en minutos con una experiencia digital fluida.</p>
+        <div class="hero__actions" data-animate-child>
+            <a class="button" href="{{ path('app_login') }}">Haz tu pedido</a>
+            <a class="button button--ghost" href="#servicios">Descubrir servicios</a>
         </div>
-        <div class="content-text">
-            <h3>Vendemos Cualquier comida</h3>
-        </div>
-    </section>
-    <main>
-        <section id="categoria">
-            <div class="content-text">
-                <h3>Categoría</h3>
+        <div class="hero__stats" data-animate-child>
+            <div class="hero__stat">
+                <span class="hero__stat-value">+120</span>
+                <span class="hero__stat-label">Restaurantes aliados</span>
             </div>
-            <div class="carrusel">
-                <div class="carrusel-list" id="carrusel-list">
-                    <button class="carrusel-arrow carrusel-prev" id="button-prev" data-button="button-prev"
-                        onclick="">
-                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left"
-                            class="svg-inline--fa fa-chevron-left fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 320 512">
-                            <path fill="currentColor"
-                                d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="carrusel-track" id="track">
-                        {% for categoria in categorias %}
-                            <div class="carrusel-item">
-                                <div>
-                                    <a href="https://deliverylions.000webhostapp.com/sitioweb/inicioPrincipal/inicioSesion.php">
-                                        <picture>
-                                            <img src="{{ asset('imgs/icons/' ~ categoria.imagen) }}" alt="Comida rápida">
-                                        </picture>
-                                    </a>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <button class="carrusel-arrow carrusel-next" id="button-next" data-button="button-next"
-                    onclick="">
-                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
-                        class="svg-inline--fa fa-chevron-right fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 320 512">
-                        <path fill="currentColor"
-                            d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z">
-                        </path>
+            <div class="hero__stat">
+                <span class="hero__stat-value">15 min</span>
+                <span class="hero__stat-label">Entrega media</span>
+            </div>
+            <div class="hero__stat">
+                <span class="hero__stat-value">98%</span>
+                <span class="hero__stat-label">Clientes satisfechos</span>
+            </div>
+        </div>
+    </div>
+    <div class="hero__visual" data-animate="fade-left">
+        <div class="hero__gallery">
+            <img src="{{ asset('imgs/imgsIndex/img1.png') }}" alt="Hamburguesa gourmet" class="hero__gallery-item hero__gallery-item--primary" loading="lazy">
+            <img src="{{ asset('imgs/imgsIndex/img2.png') }}" alt="Postre artesanal" class="hero__gallery-item hero__gallery-item--secondary" loading="lazy">
+            <img src="{{ asset('imgs/imgsIndex/img3.png') }}" alt="Plato saludable" class="hero__gallery-item hero__gallery-item--tertiary" loading="lazy">
+        </div>
+        <div class="hero__card" data-animate-child>
+            <div>
+                <span class="hero__card-title">Tracking en tiempo real</span>
+                <p>Recibe notificaciones dinámicas del estado de tu pedido y comparte tu emoción.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="categoria" class="section section--glass" data-animate="fade-up">
+    <div class="section-header">
+        <span class="badge-pill">Categorías</span>
+        <h2 class="section-title">Explora sabores según tu antojo</h2>
+        <p class="section-description">Seleccionamos las mejores opciones locales para que siempre tengas un menú vibrante al alcance de un toque.</p>
+    </div>
+    <div class="carousel-shell">
+        <div class="carrusel">
+            <div class="carrusel-list" id="carrusel-list">
+                <button class="carrusel-arrow carrusel-prev" id="button-prev" data-button="button-prev">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" class="svg-inline--fa fa-chevron-left fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                        <path fill="currentColor" d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"></path>
                     </svg>
                 </button>
+                <div class="carrusel-track" id="track">
+                    {% for categoria in categorias %}
+                        <div class="carrusel-item">
+                            <div class="category-card">
+                                <a href="https://deliverylions.000webhostapp.com/sitioweb/inicioPrincipal/inicioSesion.php" class="category-card__link">
+                                    <picture>
+                                        <img src="{{ asset('imgs/icons/' ~ categoria.imagen) }}" alt="{{ categoria.categoria|default('Categoría') }}" loading="lazy">
+                                    </picture>
+                                    <span>{{ categoria.categoria|default('Descubre más') }}</span>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
-                <div role="tablist" class="carousel__indicadores"></div>
+                <button class="carrusel-arrow carrusel-next" id="button-next" data-button="button-next">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                        <path fill="currentColor" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path>
+                    </svg>
+                </button>
             </div>
-        </section>
-        
-        <section id="servicios">
-            <div class="content-text">
-                <h3>Servicios</h3>
-            </div>
-            <div class="servicios">
-                <div class="servicios-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-pin" width="150" height="150" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ff9300" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
-                        <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
-                      </svg>
-                      <br>
-                    <h4 style="color: white;">Pedido a domicilio</h4>
-                    <br>
-                    <a class="link-servicios" href="{{path('app_index_servicios')}}">Más información</a>
-                </div>
-                <div class="servicios-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-truck icon-hover" width="150" height="150" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <defs>
-                            <linearGradient id="gradiente-stroke" x1="0%" y1="0%" x2="100%" y2="0%">
+            <div role="tablist" class="carousel__indicadores"></div>
+        </div>
+    </div>
+</section>
+
+<section id="servicios" class="section" data-animate="fade-up">
+    <div class="section-header">
+        <span class="badge-pill">Servicios</span>
+        <h2 class="section-title">Movemos tu comida con estilo</h2>
+        <p class="section-description">Desde pedidos a domicilio hasta reservas anticipadas, mantenemos cada interacción envuelta en una experiencia premium.</p>
+    </div>
+    <div class="service-grid">
+        <article class="service-card" data-animate-child>
+            <div class="service-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <defs>
+                        <linearGradient id="service-gradient-1" x1="0%" y1="0%" x2="100%" y2="0%">
                             <stop offset="0%" stop-color="#FF914D" />
                             <stop offset="100%" stop-color="#FF5E62" />
-                            </linearGradient>
-
-                            <linearGradient id="gradiente-stroke-hover" x1="0%" y1="0%" x2="100%" y2="100%">
+                        </linearGradient>
+                    </defs>
+                    <path stroke="url(#service-gradient-1)" d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                    <path stroke="url(#service-gradient-1)" d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
+                </svg>
+            </div>
+            <h3>Pedido a domicilio</h3>
+            <p>Lleva tus restaurantes favoritos directamente a casa con seguimiento minuto a minuto.</p>
+            <a class="service-link" href="{{ path('app_index_servicios') }}">Más información</a>
+        </article>
+        <article class="service-card" data-animate-child>
+            <div class="service-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <defs>
+                        <linearGradient id="service-gradient-2" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stop-color="#FF5E62" />
-                            <stop offset="100%" stop-color="#FFD700" />
-                            </linearGradient>
-                        </defs>
+                            <stop offset="100%" stop-color="#FFD166" />
+                        </linearGradient>
+                    </defs>
+                    <path stroke="url(#service-gradient-2)" d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                    <path stroke="url(#service-gradient-2)" d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                    <path stroke="url(#service-gradient-2)" d="M5 17h-2v-11a1 1 0 0 1 1 -1h9v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" />
+                </svg>
+            </div>
+            <h3>Envíos express</h3>
+            <p>Optimiza cada segundo con rutas inteligentes y notificaciones instantáneas.</p>
+            <a class="service-link" href="{{ path('app_index_servicios') }}">Más información</a>
+        </article>
+        <article class="service-card" data-animate-child>
+            <div class="service-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="#FF914D" d="M16 12.5l-5 -3l5 -3l5 3v5.5l-5 3z" />
+                    <path stroke="#FF914D" d="M11 9.5v5.5l5 3" />
+                    <path stroke="#FF914D" d="M16 12.545l5 -3.03" />
+                    <path stroke="#FF914D" d="M7 9h-5" />
+                    <path stroke="#FF914D" d="M7 12h-3" />
+                    <path stroke="#FF914D" d="M7 15h-1" />
+                </svg>
+            </div>
+            <h3>Reserva de pedido</h3>
+            <p>Programa tu orden con antelación y deja que el sistema sincronice cada detalle por ti.</p>
+            <a class="service-link" href="{{ path('app_index_servicios') }}">Más información</a>
+        </article>
+    </div>
+</section>
 
-                        <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                        <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                        <path d="M5 17h-2v-11a1 1 0 0 1 1 -1h9v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" />
-                    </svg>
-                      <br>
-                    <h4 style="color: white;">Envíos express</h4>
-                    <br>
-                    <a class="link-servicios" href="{{path('app_index_servicios')}}">Más información</a>
+<section id="nosotros" class="section section--split" data-animate="fade-up">
+    <div class="section-header section-header--left">
+        <span class="badge-pill">Nosotros</span>
+        <h2 class="section-title">Pasión por conectar personas con sabores inolvidables</h2>
+        <p class="section-description">Delivery Lions nació para impulsar a los negocios locales y crear experiencias gastronómicas memorables, todo desde una plataforma intuitiva.</p>
+    </div>
+    <div class="about-grid">
+        <div class="about-gallery" data-animate-child>
+            <img src="{{ asset('imgs/imgsIndex/img4.png') }}" alt="Equipo de Delivery Lions" class="about-gallery__item about-gallery__item--featured" loading="lazy">
+            <div class="about-gallery__stack">
+                <img src="{{ asset('imgs/imgsIndex/img2.png') }}" alt="Variedad de platos" class="about-gallery__item" loading="lazy">
+                <img src="{{ asset('imgs/imgsIndex/img3.png') }}" alt="Entrega puntual" class="about-gallery__item" loading="lazy">
+            </div>
+        </div>
+        <div class="about-content">
+            <p data-animate-child>En Delivery Lions, nos apasiona ofrecerte una plataforma intuitiva para gestionar pedidos con comodidad y estilo. Trabajamos mano a mano con negocios asturianos para que cada entrega sea memorable.</p>
+            <p data-animate-child>Optimizamos cada flujo, desde la selección de menús hasta la logística, para que disfrutes de tus platos favoritos sin complicaciones ni esperas.</p>
+            <div class="about-highlights">
+                <div class="about-highlight" data-animate-child>
+                    <span class="about-highlight__value">+45</span>
+                    <span class="about-highlight__label">Negocios aliados creciendo con nosotros</span>
                 </div>
-                <div class="servicios-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-cube-send" width="150" height="150" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ff9300" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M16 12.5l-5 -3l5 -3l5 3v5.5l-5 3z" />
-                        <path d="M11 9.5v5.5l5 3" />
-                        <path d="M16 12.545l5 -3.03" />
-                        <path d="M7 9h-5" />
-                        <path d="M7 12h-3" />
-                        <path d="M7 15h-1" />
-                      </svg>
-                      <br>
-                    <h4 style="color: white;">Reserva de pedido</h4>
-                    <br>
-                    <a class="link-servicios" href="{{path('app_index_servicios')}}">Más información</a>
+                <div class="about-highlight" data-animate-child>
+                    <span class="about-highlight__value">360º</span>
+                    <span class="about-highlight__label">Cobertura integral: pedidos, envíos y reservas</span>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
+{% endblock %}
 
-        <section id="nosotros" class="nosotros">
-            <div class="content-text">
-                <h3 style="font-size:3rem">Nosotros</h3>
-            </div> 
-                <div class="menu"> <!--IMAGENES 1-->
-                    <img src="{{ asset('imgs/imgsIndex/img1.png') }}" alt="">
-                    <img src="{{ asset('imgs/imgsIndex/img2.png') }}" alt="">
-                    <img src="{{ asset('imgs/imgsIndex/img3.png') }}" alt="">
-                    <img src="{{ asset('imgs/imgsIndex/img4.png') }}" alt="">
-                </div>    
-                <div class="texto">
-                    <p style="color: white; text-align:justify;">En Delivery Lions, nos enorgullece ofrecerte una plataforma intuitiva y eficiente para gestionar tus pedidos de comida con comodidad y estilo. En el corazón de nuestra misión está la pasión por brindarte un servicio de pedido de alimentos excepcional, diseñado específicamente para satisfacer tus necesidades en Asturias. Nos esforzamos por facilitar tu vida cotidiana al poner a tu alcance una selección diversa de negocios de calidad, asegurando que cada comida sea una experiencia deliciosa y sin complicaciones.</p>
-                    <p style="color: white; text-align:justify;">Nuestro equipo está comprometido con la excelencia en el servicio al cliente. Explora nuestra aplicación y descubre la comodidad de tener los mejores negocios de la zona al alcance de tu mano. En Delivery Lions, estamos dedicados a hacer que tus experiencias gastronómicas en Asturias sean inolvidables.</p>
-                </div>
-        </section>
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedBlocks = document.querySelectorAll('[data-animate]');
+            const childBlocks = document.querySelectorAll('[data-animate-child]');
 
-        
-    </main>
-    {% block javascripts %}
-        <script src="https://cdn.jsdelivr.net/npm/glider-js@1.7.8/glider.min.js"></script>
-        <script>
-            $(document).ready(function () {
-
-                $('.content h1').addClass('visible');
-
-                setTimeout(() => {
-                    $('.content h3').addClass('visible');
-                }, 500);
-
-                function mostrarParrafos() {
-                    $('.nosotros .texto p').each(function () {
-                        const topElemento = $(this).offset().top;
-                        const topVentana = $(window).scrollTop() + $(window).height();
-
-                        if (topElemento < topVentana - 50 && !$(this).hasClass('visible')) {
-                            $(this).addClass('visible');
-                        }
-                    });
-                }
-
-                mostrarParrafos(); // al cargar
-                $(window).on('scroll', mostrarParrafos);
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.2
             });
-        </script>
-    {% endblock %}
+
+            animatedBlocks.forEach((element) => {
+                const delay = element.dataset.animateDelay;
+                if (delay) {
+                    element.style.setProperty('--animate-delay', `${delay}ms`);
+                }
+                observer.observe(element);
+            });
+
+            childBlocks.forEach((element, index) => {
+                element.classList.add('animate-child');
+                element.style.setProperty('--animate-delay', `${(index + 1) * 90}ms`);
+                observer.observe(element);
+            });
+        });
+    </script>
 {% endblock %}
