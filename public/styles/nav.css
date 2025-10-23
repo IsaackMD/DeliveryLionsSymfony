@@ -13,10 +13,10 @@
     justify-content: center;
     padding: clamp(0.75rem, 1.5vw, 1.25rem) clamp(1rem, 2vw, 2rem);
     border-radius: 24px;
-    background: linear-gradient(135deg, rgba(13, 23, 42, 0.65), rgba(29, 42, 71, 0.55));
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    backdrop-filter: blur(18px);
-    box-shadow: 0 24px 45px rgba(15, 23, 42, 0.35);
+    background: linear-gradient(105deg, rgba(255, 102, 0, 0.9), rgba(255, 145, 77, 0.92));
+    border: 1px solid rgba(255, 181, 120, 0.65);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 24px 55px rgba(0, 0, 0, 0.45);
     transition: transform 0.45s ease, box-shadow 0.45s ease;
 }
 
@@ -24,9 +24,9 @@
     content: "";
     position: absolute;
     inset: -8px;
-    background: radial-gradient(circle at 15% 20%, rgba(255, 145, 77, 0.55), transparent 55%),
-                radial-gradient(circle at 85% 30%, rgba(255, 94, 98, 0.45), transparent 60%),
-                radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.08), transparent 70%);
+    background: radial-gradient(circle at 12% 35%, rgba(255, 255, 255, 0.2), transparent 55%),
+                radial-gradient(circle at 85% 40%, rgba(255, 145, 77, 0.35), transparent 65%),
+                radial-gradient(circle at 50% 100%, rgba(255, 145, 77, 0.18), transparent 75%);
     z-index: -1;
     opacity: 0;
     transform: scale(0.98);
@@ -35,7 +35,7 @@
 
 .nav-surface:hover {
     transform: translateY(-4px);
-    box-shadow: 0 32px 65px rgba(15, 23, 42, 0.45);
+    box-shadow: 0 32px 65px rgba(0, 0, 0, 0.55);
 }
 
 .nav-surface:hover::after {
@@ -55,7 +55,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.85rem;
-    color: #f8fafc;
+    color: #ffffff;
     text-decoration: none;
     font-weight: 600;
     letter-spacing: 0.4px;
@@ -74,7 +74,7 @@
     border-radius: 18px;
     overflow: hidden;
     border: 2px solid rgba(255, 255, 255, 0.35);
-    box-shadow: 0 12px 26px rgba(15, 23, 42, 0.35);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.45);
 }
 
 .nav-logo__image img {
@@ -98,7 +98,7 @@
 .nav-logo__subtitle {
     font-size: clamp(0.7rem, 1.4vw, 0.9rem);
     font-weight: 400;
-    color: rgba(226, 232, 240, 0.75);
+    color: rgba(255, 255, 255, 0.78);
 }
 
 .nav-toggle {
@@ -106,9 +106,9 @@
     width: 46px;
     height: 46px;
     border-radius: 16px;
-    border: 1px solid rgba(148, 163, 184, 0.25);
-    background: rgba(15, 23, 42, 0.45);
-    color: #f8fafc;
+    border: 1px solid rgba(255, 145, 77, 0.35);
+    background: rgba(0, 0, 0, 0.35);
+    color: #ffffff;
     align-items: center;
     justify-content: center;
     gap: 6px;
@@ -154,7 +154,7 @@
     gap: 0.45rem;
     padding: 0.65rem 1.15rem;
     border-radius: 14px;
-    color: rgba(226, 232, 240, 0.9);
+    color: rgba(255, 255, 255, 0.85);
     text-decoration: none;
     font-size: 0.95rem;
     font-weight: 500;
@@ -173,7 +173,7 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: linear-gradient(120deg, rgba(255, 145, 77, 0.2), rgba(255, 94, 98, 0.15));
+    background: linear-gradient(120deg, rgba(255, 145, 77, 0.22), rgba(255, 94, 98, 0.18));
     opacity: 0;
     transform: scale(0.95);
     transition: opacity 0.35s ease, transform 0.35s ease;
@@ -193,15 +193,15 @@
 }
 
 .nav-link--ghost {
-    border: 1px solid rgba(148, 163, 184, 0.3);
-    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid rgba(255, 145, 77, 0.25);
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .nav-link--accent {
-    background: linear-gradient(135deg, #ff914d, #ff5e62);
-    color: #0f172a;
+    background: linear-gradient(135deg, #ffb36d, #ff914d);
+    color: #1f1f1f;
     font-weight: 600;
-    box-shadow: 0 14px 30px rgba(255, 94, 98, 0.35);
+    box-shadow: 0 14px 30px rgba(255, 145, 77, 0.45);
 }
 
 .nav-link--accent::after {
@@ -210,7 +210,7 @@
 
 .nav-link--accent:hover,
 .nav-link--accent:focus-visible {
-    color: #0f172a;
+    color: #1f1f1f;
     transform: translateY(-3px) scale(1.01);
 }
 
@@ -218,7 +218,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: rgba(226, 232, 240, 0.75);
+    color: rgba(255, 255, 255, 0.72);
     font-size: 0.9rem;
     font-weight: 500;
 }
@@ -247,10 +247,10 @@
         left: 0;
         margin: 0 auto;
         width: min(380px, 92vw);
-        background: rgba(13, 23, 42, 0.92);
+        background: rgba(33, 32, 32, 0.96);
         border-radius: 22px;
-        border: 1px solid rgba(148, 163, 184, 0.2);
-        box-shadow: 0 30px 60px rgba(15, 23, 42, 0.45);
+        border: 1px solid rgba(255, 145, 77, 0.25);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
         padding: 1.35rem;
         display: flex;
         flex-direction: column;
@@ -284,7 +284,7 @@
     }
 
     .nav-meta {
-        border-top: 1px solid rgba(148, 163, 184, 0.2);
+        border-top: 1px solid rgba(255, 145, 77, 0.2);
         padding-top: 0.75rem;
         justify-content: center;
     }
@@ -292,7 +292,7 @@
     .nav-overlay {
         position: fixed;
         inset: 0;
-        background: rgba(7, 11, 23, 0.6);
+        background: rgba(0, 0, 0, 0.6);
         backdrop-filter: blur(4px);
         opacity: 0;
         visibility: hidden;
