@@ -71,10 +71,11 @@
                         <div class="carrusel-item">
                             <div class="category-card">
                                 <a href="https://deliverylions.000webhostapp.com/sitioweb/inicioPrincipal/inicioSesion.php" class="category-card__link">
-                                    <picture>
-                                        <img src="{{ asset('imgs/icons/' ~ categoria.imagen) }}" alt="{{ categoria.categoria|default('Categoría') }}" loading="lazy">
-                                    </picture>
-                                    <span>{{ categoria.categoria|default('Descubre más') }}</span>
+                                    <span class="category-card__media">
+                                        <img class="category-card__image" src="{{ asset('imgs/icons/' ~ categoria.imagen) }}" alt="{{ categoria.categoria|default('Categoría') }}" loading="lazy">
+                                    </span>
+                                    <span class="category-card__label">{{ categoria.categoria|default('Descubre más') }}</span>
+                                    <span class="category-card__cta">Explorar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
                                 </a>
                             </div>
                         </div>
@@ -189,6 +190,21 @@
         document.addEventListener('DOMContentLoaded', () => {
             const animatedBlocks = document.querySelectorAll('[data-animate]');
             const childBlocks = document.querySelectorAll('[data-animate-child]');
+            const heroSection = document.getElementById('inicio');
+
+            const revealTarget = (target) => {
+                if (!target) {
+                    return;
+                }
+
+                target.classList.add('is-visible');
+                target.querySelectorAll('[data-animate-child]').forEach((element, index) => {
+                    element.classList.add('is-visible');
+                    if (!element.style.getPropertyValue('--animate-delay')) {
+                        element.style.setProperty('--animate-delay', `${(index + 1) * 90}ms`);
+                    }
+                });
+            };
 
             const revealHashTarget = () => {
                 const { hash } = window.location;
@@ -201,10 +217,7 @@
                     return;
                 }
 
-                target.classList.add('is-visible');
-                target.querySelectorAll('[data-animate-child]').forEach((element) => {
-                    element.classList.add('is-visible');
-                });
+                revealTarget(target);
             };
 
             if ('IntersectionObserver' in window) {
@@ -237,6 +250,12 @@
                 childBlocks.forEach((element, index) => {
                     element.classList.add('animate-child', 'is-visible');
                     element.style.setProperty('--animate-delay', `${(index + 1) * 90}ms`);
+                });
+            }
+
+            if (heroSection) {
+                requestAnimationFrame(() => {
+                    revealTarget(heroSection);
                 });
             }
 
