@@ -4,6 +4,19 @@
     background-position: center;
     background-repeat: no-repeat;
     width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(41, 40, 40, 0.3), rgba(255, 145, 77, 0.15));
+    pointer-events: none;
 }
 
 .content-text {
@@ -14,6 +27,8 @@
     padding: 60px;
     color: white;
     font-size: 35px;
+    position: relative;
+    z-index: 1;
 }
 
 .content h1 {
@@ -22,21 +37,47 @@
     font-size: 45px;
     width: 45%;
     font-weight: bolder;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 145, 77, 0.4);
+    animation: fadeInDown 1s ease-out forwards;
 }
 
 .content h3 {
     font-style: initial;
-    padding: 10px;
-    width: 100;
-    margin: 0 0 0 0;
-    color: black;
+    padding: 10px 20px;
+    width: auto;
+    margin: 0;
+    color: white;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
     font-weight: bolder;
     font-size: 25px;
     backdrop-filter: blur(10px);
-    background-color: #f7e4d82d;
-    border-radius: 6px;
+    background: linear-gradient(135deg, rgba(255, 145, 77, 0.3), rgba(255, 94, 98, 0.3));
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeInUp 1s ease-out 0.3s forwards;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 
@@ -46,6 +87,16 @@
     margin: 15px 120px 15px 0;
     align-items: center;
     min-height: 45px;
+    animation: fadeIn 1s ease-out 0.5s backwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .search {
@@ -55,15 +106,24 @@
     align-items: center;
     width: 60px;
     height: 60px;
-    background: white;
-    border-radius: 8px;
+    background: linear-gradient(135deg, #ffffff, #f5f5f5);
+    border-radius: 30px;
     padding: 10px 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    transition: .5s ease-in-out;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border: 2px solid transparent;
 }
 
 .search:hover {
     width: 550px;
+    border-color: #FF914D;
+    box-shadow: 0 8px 25px rgba(255, 145, 77, 0.4);
+}
+
+.search:focus-within {
+    width: 550px;
+    border-color: #FF914D;
+    box-shadow: 0 8px 25px rgba(255, 145, 77, 0.4);
 }
 
 .search button {
@@ -97,6 +157,7 @@ i {
     color: white;
     margin-bottom: 2rem;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    animation: fadeInDown 0.8s ease-out;
 }
 
 .afiliados-content {
@@ -106,33 +167,58 @@ i {
     border-radius: 20px;
     width: 300px;
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeInScale 0.6s ease-out backwards;
+    border: 2px solid transparent;
 }
+
+.afiliados-content:nth-child(even) {
+    animation-delay: 0.2s;
+}
+
+.afiliados-content:nth-child(odd) {
+    animation-delay: 0.3s;
+}
+
 .afiliados-content:hover {
-    transform: translateY(-10px) scale(1.03);
-    box-shadow: 0 10px 25px rgba(255, 115, 0, 0.3);
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(255, 115, 0, 0.5);
+    border-color: #FF914D;
+    background: linear-gradient(145deg, #333, #222);
 }
 
 .afiliados-content h3 {
     color: white;
     font-size: 30px;
+    margin-top: 1rem;
 }
+
 .img-content img{
-     width: 160px;
+    width: 160px;
     height: 160px;
     border-radius: 50%;
     border: 4px solid #ff7300;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    transition: all 0.4s ease;
     object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-
-
-
 .afiliados-content:hover .img-content img {
-    transform: scale(1.1) rotate(3deg);
-    box-shadow: 0 0 20px rgba(255, 115, 0, 0.6);
+    transform: scale(1.15) rotate(5deg);
+    box-shadow: 0 0 30px rgba(255, 115, 0, 0.8);
+    border-color: #FF5E62;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 .comida-container {
     display: flex;
@@ -157,12 +243,30 @@ i {
     height: 34.375rem;
     display: flex;
     flex-direction: row;
-    background: #151212;
+    background: linear-gradient(145deg, #1a1818, #0f0e0e);
     flex-wrap: wrap;
     justify-content: center;
     margin: 1rem auto;
     border-radius: 30px;
     padding: 15px 0px;
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 0.8s ease-out backwards;
+    border: 2px solid transparent;
+}
+
+.comida-content:nth-child(even) {
+    animation-delay: 0.2s;
+}
+
+.comida-content:nth-child(odd) {
+    animation-delay: 0.3s;
+}
+
+.comida-content:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(255, 145, 77, 0.3);
+    border-color: rgba(255, 145, 77, 0.5);
 }
 
 .comida-content button {
@@ -203,6 +307,13 @@ i {
     height: 250px;
     width: 100%;
     border-radius: 15px;
+    transition: all 0.4s ease;
+    object-fit: cover;
+}
+
+.comida-content:hover .img-content img {
+    transform: scale(1.05);
+    filter: brightness(1.1);
 }
 
 .carrusel-item {
@@ -222,13 +333,21 @@ i {
     color: white;
     font-size: 20px;
     font-family: 'Poppins';
-    font-weight: 500;
+    font-weight: 600;
     padding: 15px 52px;
     margin-top: 8px;
     border-radius: 38px;
     border: none;
-    background: #FF914D;
+    background: linear-gradient(135deg, #FF914D, #FF5E62);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 145, 77, 0.3);
+    display: inline-block;
+}
 
+.btn-content a:hover {
+    background: linear-gradient(135deg, #FF5E62, #ff9300);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 145, 77, 0.5);
 }
 
 .title h3 {
